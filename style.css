@@ -52,7 +52,6 @@
 }
 
 .green-marble {
-    position: absolute;
     font-family: Times, 'Times New Roman', serif;
     transform: scale(1, 1.2);
     -webkit-transform: scale(1, 1.2);
@@ -64,6 +63,7 @@
 }
 .green-marble .text {
     text-align: center;
+    position: relative;
     color: rgba(178, 202, 189, 0.7);
 }
 .green-marble .text:before {
@@ -78,3 +78,42 @@
     width: 100%;
 }
 
+.chrome .text {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    background: #7286a7;
+    background: #7286a7;
+    background: #7286a7;
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzcyODZhNyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEzJSIgc3RvcC1jb2xvcj0iIzcyODZhNyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjU2JSIgc3RvcC1jb2xvcj0iIzgxMmYzMCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZmZmZmYiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(top,  #7286a7 0%, #7286a7 13%, #ffffff 50%, #812f30 56%, #ffffff 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#7286a7), color-stop(13%,#7286a7), color-stop(50%,#ffffff), color-stop(56%,#812f30), color-stop(100%,#ffffff));
+    background: -webkit-linear-gradient(top,  #7286a7 0%,#7286a7 13%,#ffffff 50%,#812f30 56%,#ffffff 100%);
+    background: -o-linear-gradient(top,  #7286a7 0%,#7286a7 13%,#ffffff 50%,#812f30 56%,#ffffff 100%);
+    background: -ms-linear-gradient(top,  #7286a7 0%,#7286a7 13%,#ffffff 50%,#812f30 56%,#ffffff 100%);
+    background: linear-gradient(to bottom,  #7286a7 0%,#7286a7 13%,#ffffff 50%,#812f30 56%,#ffffff 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7286a7', endColorstr='#ffffff',GradientType=0 );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.chrome .text:before {
+    content: '80s Fucking Chrome';
+    position: absolute;
+    z-index: -1;
+    text-shadow: 0px 0px 0 rgb(157,157,157),
+        1px 1px 0 rgb(151,151,151),
+        2px 2px 0 rgb(145,145,145),
+        3px 3px 0 rgb(138,138,138),
+        4px 4px 0 rgb(132,132,132),
+        5px 5px 0 rgb(126,126,126),
+        6px 6px 0 rgb(120,120,120),
+        7px 7px 0 rgb(114,114,114),
+        8px 8px 0 rgb(108,108,108),
+        9px 9px 0 rgb(102,102,102),
+        10px 10px 0 rgb(96,96,96),
+        11px 11px 0 rgb(89,89,89),
+        12px 12px 0 rgb(83,83,83),
+        13px 13px 0 rgb(77,77,77),
+        14px 14px 0 rgb(71,71,71),
+        15px 15px 0 rgb(65,65,65);
+}
