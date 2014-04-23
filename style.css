@@ -32,7 +32,6 @@
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ee00ff', endColorstr='#aa00ff',GradientType=1 );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    -webkit-text-stroke: 1px #fff;
     font-weight: bold;
     padding-left: 0.7em;
     letter-spacing: -0.01em;
@@ -140,4 +139,35 @@
     filter: progid:DXImageTransform.Microsoft.Glow(Color=#0000aa,Strength=1);
     text-shadow: 0.13em -0.13em 0px #0000aa;
     letter-spacing: -0.05em;
+}
+
+.blues .text:nth-letter(2) {
+    color: #ff0000;
+}
+
+.sunset .text {
+    font-family: 'Times New Roman';
+    background: #fafacc;
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZhZmFjYyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmMzkxOWIiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(top, #fafacc 0%, #f3919b 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fafacc), color-stop(100%,#f3919b));
+    background: -webkit-linear-gradient(top, #fafacc 0%,#f3919b 100%);
+    background: -o-linear-gradient(top, #fafacc 0%,#f3919b 100%);
+    background: -ms-linear-gradient(top, #fafacc 0%,#f3919b 100%);
+    background: linear-gradient(to bottom, #fafacc 0%,#f3919b 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fafacc', endColorstr='#f3919b',GradientType=0 );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.sunset .text:before {
+    content: 'Lisa Frank Sunset';
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    position: absolute;
+    z-index: -1;
+    text-shadow:0px 0px 0 rgb(-15,112,158),-1px -1px 0 rgb(-20,107,153),-2px -2px 0 rgb(-25,102,148),-3px -3px 0 rgb(-30,97,143),-4px -4px 0 rgb(-35,92,138),-5px -5px 0 rgb(-40,87,133),-6px -6px 0 rgb(-45,82,128),-7px -7px 0 rgb(-50,77,123), -8px -8px 0 rgb(-55,72,118),-9px -9px 8px rgba(0,0,0,0),-9px -9px 1px rgba(0,0,0,0.5),0px 0px 8px rgba(0,0,0,.2);
 }
