@@ -109,25 +109,33 @@
 .chrome .text:before {
     position: absolute;
     z-index: -1;
-    text-shadow: 0em 0em 0 rgb(147,123,116),
-        0.01em 0.01em 0 rgb(141,117,110),
-        0.02em 0.02em 0 rgb(136,112,105),
-        0.03em 0.03em 0 rgb(130,106,99),
-        0.04em 0.04em 0 rgb(125,101,94),
-        0.05em 0.05em 0 rgb(120,96,89),
-        0.06em 0.06em 0 rgb(114,90,83),
-        0.07em 0.07em 0 rgb(109,85,78),
-        0.08em 0.08em 0 rgb(103,79,72),
-        0.09em 0.09em 0 rgb(98,74,67),
-        0.1em 0.1em 0 rgb(92,68,61),
-        0.11em 0.11em 0 rgb(87,63,56),
-        0.12em 0.12em 0 rgb(82,58,51);
+    text-shadow:
+        0.01em 0em 0 #161616,
+        0em 0.01em 0 #8d8d8d,
+        0.02em 0.01em 0 #161616,
+        0.01em 0.02em 0 #8d8d8d,
+        0.03em 0.02em 0 #161616,
+        0.02em 0.03em 0 #8d8d8d,
+        0.04em 0.03em 0 #161616,
+        0.03em 0.04em 0 #8d8d8d,
+        0.05em 0.04em 0 #161616,
+        0.04em 0.05em 0 #8d8d8d,
+        0.06em 0.05em 0 #161616,
+        0.05em 0.06em 0 #8d8d8d,
+        0.07em 0.06em 0 #161616,
+        0.06em 0.07em 0 #8d8d8d,
+        0.08em 0.07em 0 #161616,
+        0.07em 0.08em 0 #8d8d8d,
+        0.09em 0.08em 0 #161616,
+        0.08em 0.09em 0 #8d8d8d,
+        0.1em 0.09em 0 #161616,
+        0.09em 0.1em 0 #8d8d8d;
 }
 
 .blues .text {
     font-family: Impact;
     color: #24c0fd;
-    -webkit-text-stroke: 0.03em #0000aa;
+    -webkit-text-stroke: 0.02em #0000aa;
     filter: progid:DXImageTransform.Microsoft.Glow(Color=#0000aa,Strength=1);
     text-shadow: 0.13em -0.13em 0px #0000aa;
     letter-spacing: -0.05em;
@@ -207,4 +215,26 @@
         0.06em 0.07em 0 #c23d00,
         0.08em 0.07em 0 #802700,
         0.07em 0.08em 0 #c23d00;
+}
+
+.graydient .text {
+    font-family: Arial;
+    font-weight: bold;
+    letter-spacing: 0.08em;
+    background: #9d9d9d;
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzlkOWQ5ZCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZmZmZmYiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(top,  #9d9d9d 0%, #ffffff 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#9d9d9d), color-stop(100%,#ffffff));
+    background: -webkit-linear-gradient(top,  #9d9d9d 0%,#ffffff 100%);
+    background: -o-linear-gradient(top,  #9d9d9d 0%,#ffffff 100%);
+    background: -ms-linear-gradient(top,  #9d9d9d 0%,#ffffff 100%);
+    background: linear-gradient(to bottom,  #9d9d9d 0%,#ffffff 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9d9d9d', endColorstr='#ffffff',GradientType=0 );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.graydient .text:before {
+    position: absolute;
+    z-index: -1;
+    text-shadow: 0.03em 0.03em #5b5b5b;
 }
