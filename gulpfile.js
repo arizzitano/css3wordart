@@ -12,10 +12,11 @@ gulp.task('lint', function() {
 });
 
 gulp.task('less', function () {
-  gulp.src('./less/**/*.less')
+  gulp.src('./less/*.less')
     .pipe(less({
         paths: [ path.join(__dirname, 'less', 'includes') ]
     }))
+    .on('error', errorHandler)
     .pipe(gulp.dest('./public/css'));
 });
 
@@ -25,4 +26,15 @@ gulp.task('connect', function() {
     });
 });
 
+var watcher = gulp.watch('./less/*.less', ['less'] );
+
+watcher.on('change', function(event) {
+  console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+});
+
 gulp.task('default', function() { ['lint', 'less'] });
+
+function errorHandler (error) {
+    console.log(error.toString());
+    this.emit('end');
+}
