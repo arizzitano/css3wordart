@@ -212,15 +212,11 @@ __      _____  ___ ___   _   ___ _____
 }
 
 .rainbow {
-    transform: scale(1, 1.5);
-    -webkit-transform: scale(1, 1.5);
-    -moz-transform: scale(1, 1.5);
-    -o-transform: scale(1, 1.5);
-    -ms-transform: scale(1, 1.5);
-    font-family: Arial, sans-serif;
+    .transform (scale(1, 1.5));
 
     .text {
         background: #ee00ff;
+        font-family: Arial, sans-serif;
         background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2VlMDBmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjE2JSIgc3RvcC1jb2xvcj0iI2ZmMzAzMCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjMyJSIgc3RvcC1jb2xvcj0iI2ZmOTkwMCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjQ5JSIgc3RvcC1jb2xvcj0iI2ZmZjQzMCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjY3JSIgc3RvcC1jb2xvcj0iIzAwZmYwOCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjgzJSIgc3RvcC1jb2xvcj0iIzMyMjNmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNhYTAwZmYiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
         background: -moz-linear-gradient(left,  #ee00ff 0%, #ff3030 16%, #ff9900 32%, #fff430 49%, #00ff08 67%, #3223ff 83%, #aa00ff 100%);
         background: -webkit-gradient(linear, left top, right top, color-stop(0%,#ee00ff), color-stop(16%,#ff3030), color-stop(32%,#ff9900), color-stop(49%,#fff430), color-stop(67%,#00ff08), color-stop(83%,#3223ff), color-stop(100%,#aa00ff));
@@ -252,15 +248,11 @@ __      _____  ___ ___   _   ___ _____
 }
 
 .green-marble {
-    font-family: Times, 'Times New Roman', serif;
-    transform: scale(1, 1.2);
-    -webkit-transform: scale(1, 1.2);
-    -moz-transform: scale(1, 1.2);
-    -o-transform: scale(1, 1.2);
-    -ms-transform: scale(1, 1.2);
-    letter-spacing: -0.01em;
+    .transform (scale(1, 1.2));
 
     .text {
+        font-family: Times, 'Times New Roman', serif;
+        letter-spacing: -0.01em;
         text-align: center;
         position: relative;
         color: rgba(178, 202, 189, 0.7);
@@ -329,11 +321,7 @@ __      _____  ___ ___   _   ___ _____
 }
 
 .superhero {
-    transform: skew(0, -15deg) scale(1, 1.5);
-    -webkit-transform: skew(0, -15deg) scale(1, 1.5);
-    -moz-transform: skew(0, -15deg) scale(1, 1.5);
-    -o-transform: skew(0, -15deg) scale(1, 1.5);
-    -ms-transform: skew(0, -15deg) scale(1, 1.5);
+    .transform (skew(0, -15deg) scale(1, 1.5));
 
     .text {
         font-family: Impact;
@@ -380,10 +368,10 @@ __      _____  ___ ___   _   ___ _____
 
 .outline {
     .transform (scale(1,1.2));
-    letter-spacing: -0.01em;
-    font-family: Arial;
-    font-weight: bold;
-    .text {
+    .text {    
+        letter-spacing: -0.01em;
+        font-family: Arial;
+        font-weight: bold;
         color: #fff;
         -webkit-text-stroke: 0.03em #000;
         filter: progid:DXImageTransform.Microsoft.Glow(Color=#000,Strength=1);
@@ -392,11 +380,11 @@ __      _____  ___ ___   _   ___ _____
 
 .italic-outline {
     .transform (scale(1,1.3));
-    letter-spacing: -0.01em;
-    font-family: Arial;
-    font-weight: bold;
-    font-style: italic;
     .text {
+        letter-spacing: -0.01em;
+        font-family: Arial;
+        font-weight: bold;
+        font-style: italic;
         color: #fff;
         -webkit-text-stroke: 0.01em #000;
         filter: progid:DXImageTransform.Microsoft.Glow(Color=#000,Strength=1);
