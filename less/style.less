@@ -1,8 +1,8 @@
 /* -------------------------------------
- ___ ___ ___ ___ _____ 
+ ___ ___ ___ ___ _____
 | _ \ __/ __| __|_   _|
-|   / _|\__ \ _|  | |  
-|_|_\___|___/___| |_|  
+|   / _|\__ \ _|  | |
+|_|_\___|___/___| |_|
 
 -------------------------------------- */
 
@@ -23,7 +23,7 @@ html, body {
 }
 
 /* -------------------------------------
- ___ __  __   _   ___ ___ ___ 
+ ___ __  __   _   ___ ___ ___
 |_ _|  \/  | /_\ / __| __/ __|
  | || |\/| |/ _ \ (_ | _|\__ \
 |___|_|  |_/_/ \_\___|___|___/
@@ -52,7 +52,7 @@ html, body {
 @gray-block: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzYwNjA2MCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM2MDYwNjAiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
 
 /* -------------------------------------
- ___ ___  _  _ _____ ___ 
+ ___ ___  _  _ _____ ___
 | __/ _ \| \| |_   _/ __|
 | _| (_) | .` | | | \__ \
 |_| \___/|_|\_| |_| |___/
@@ -68,7 +68,7 @@ html, body {
 }
 
 /* -------------------------------------
- __  __ _____  _____ _  _ ___ 
+ __  __ _____  _____ _  _ ___
 |  \/  |_ _\ \/ /_ _| \| / __|
 | |\/| || | >  < | || .` \__ \
 |_|  |_|___/_/\_\___|_|\_|___/
@@ -109,7 +109,7 @@ html, body {
     width: 1em;
     word-wrap: break-word;
     letter-spacing: 0.27em;
-    
+
     .text {
         display: block;
 
@@ -125,7 +125,7 @@ html, body {
 }
 
 /* -------------------------------------
-__      _____ _  _ ___ ___ 
+__      _____ _  _ ___ ___
 \ \    / /_ _| \| / _ \ __|
  \ \/\/ / | || .` \_, /__ \
   \_/\_/ |___|_|\_|/_/|___/
@@ -215,37 +215,59 @@ __      _____ _  _ ___ ___
     outline: 0;
 }
 
+/* -------------------------------------
+  ___   _   _    _    ___ _____   __
+ / __| /_\ | |  | |  | __| _ \ \ / /
+| (_ |/ _ \| |__| |__| _||   /\ V /
+ \___/_/ \_\____|____|___|_|_\ |_|
+
+ -------------------------------------- */
+
 .gallery > p {
     margin: 22px 8px 10px 8px;
 }
+
 .gallery-thumbs {
     margin-left: 11px;
-}
-.gallery-thumbs > li {
-    .inset();
-    display: inline-block;
-    width: 96px;
-    height: 74px;
-    background: #fff;
-    text-align: center;
-    padding-top: 20px;
-    vertical-align: middle;
-    font-size: 24px;
-}
-.gallery-thumbs > li.c4 {
-    font-size: 18px;
-    padding-top: 26px;
-}
-.gallery-thumbs > li.e5 {
-    font-size: 21px;
-    padding-top: 23px;
+
+    & > li {
+        .inset();
+        display: inline-block;
+        width: 96px;
+        height: 74px;
+        background: #fff;
+        padding: 2px;
+        text-align: center;
+        //padding-top: 20px;
+        vertical-align: middle;
+        font-size: 22px;
+    }
+
+    .a6, .b6, .c6, .d6, .e6 {
+        padding: 0 0 0 15px;
+        font-size: 1.1em;
+        text-align: left;
+
+        .highlight {
+            text-align: center;
+            position: absolute;
+            top: 3px;
+            right: 3px;
+            width: 40px;
+            height: 25px;
+            border-left: 1px solid #acacac;
+            border-bottom: 1px solid #acacac;
+            font-size: 2em;
+            padding-left: 3px;
+        }
+    }
 }
 
 /* -------------------------------------
-__      _____  ___ ___   _   ___ _____ 
+__      _____  ___ ___   _   ___ _____
 \ \    / / _ \| _ \   \ /_\ | _ \_   _|
- \ \/\/ / (_) |   / |) / _ \|   / | |  
-  \_/\_/ \___/|_|_\___/_/ \_\_|_\ |_|  
+ \ \/\/ / (_) |   / |) / _ \|   / | |
+  \_/\_/ \___/|_|_\___/_/ \_\_|_\ |_|
 
 -------------------------------------- */
 .wordart {
@@ -271,10 +293,11 @@ __      _____  ___ ___   _   ___ _____
 
 .rainbow {
     .transform (scale(1, 1.5));
+    font-size: 0.84em;
 
     .text {
-        background: #ee00ff;
         font-family: Arial, sans-serif;
+        background: #ee00ff;
         background: @rainbow;
         background: -moz-linear-gradient(left,  #ee00ff 0%, #ff3030 16%, #ff9900 32%, #fff430 49%, #00ff08 67%, #3223ff 83%, #aa00ff 100%);
         background: -webkit-gradient(linear, left top, right top, color-stop(0%,#ee00ff), color-stop(16%,#ff3030), color-stop(32%,#ff9900), color-stop(49%,#fff430), color-stop(67%,#00ff08), color-stop(83%,#3223ff), color-stop(100%,#aa00ff));
@@ -285,9 +308,9 @@ __      _____  ___ ___   _   ___ _____
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ee00ff', endColorstr='#aa00ff',GradientType=1 );
         .textBg();
         font-weight: bold;
-        padding-left: 0.7em;
         letter-spacing: -0.01em;
-        
+        margin-left: 0.7em;
+
         &:before {
             position: absolute;
             z-index: -1;
@@ -295,17 +318,14 @@ __      _____  ___ ___   _   ___ _____
             left: 0.4em;
             -webkit-text-fill-color: rgba(50,50,50,0.3);
             -webkit-background-clip: border-box;
-            transform: skew(60deg, 0) scale(1, 0.5);
-            -webkit-transform: skew(60deg, 0) scale(1, 0.5);
-            -moz-transform: skew(60deg, 0) scale(1, 0.5);
-            -o-transform: skew(60deg, 0) scale(1, 0.5);
-            -ms-transform: skew(60deg, 0) scale(1, 0.5);
+            .transform (skew(60deg, 0) scale(1, 0.5));
         }
     }
 }
 
 .green-marble {
     .transform (scale(1, 1.2));
+    font-size: 1.1em;
 
     .text {
         font-family: Times, 'Times New Roman', serif;
@@ -327,6 +347,7 @@ __      _____  ___ ___   _   ___ _____
 }
 
 .horizon .text {
+    font-size: 0.96em;
     font-family: Arial, sans-serif;
     font-weight: bold;
     background: #7286a7;
@@ -346,6 +367,7 @@ __      _____  ___ ___   _   ___ _____
 }
 
 .blues .text {
+    font-size: 1.22em;
     font-family: Impact;
     color: #24c0fd;
     -webkit-text-stroke: 0.02em #0000aa;
@@ -356,6 +378,7 @@ __      _____  ___ ___   _   ___ _____
 
 .sunset {
     .transform (scale(1,1.2));
+    font-size: 1.1em;
 
     .text {
         font-family: Times, 'Times New Roman', serif;
@@ -377,7 +400,8 @@ __      _____  ___ ___   _   ___ _____
 }
 
 .superhero {
-    .transform (skew(0, -15deg) scale(1, 1.5));
+    .transform (skew(0, -15deg) scale(1, 1.5) translateY(20%));
+    font-size: 1.12em;
 
     .text {
         font-family: Impact;
@@ -398,32 +422,37 @@ __      _____  ___ ___   _   ___ _____
     }
 }
 
-.graydient .text {
-    font-family: Arial;
-    font-weight: bold;
-    letter-spacing: 0.08em;
-    background: #9d9d9d;
-    background: @graydient;
-    background: -moz-linear-gradient(top,  #9d9d9d 0%, #ffffff 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#9d9d9d), color-stop(100%,#ffffff));
-    background: -webkit-linear-gradient(top,  #9d9d9d 0%,#ffffff 100%);
-    background: -o-linear-gradient(top,  #9d9d9d 0%,#ffffff 100%);
-    background: -ms-linear-gradient(top,  #9d9d9d 0%,#ffffff 100%);
-    background: linear-gradient(to bottom,  #9d9d9d 0%,#ffffff 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9d9d9d', endColorstr='#ffffff',GradientType=0 );
-    .textBg();
+.graydient {
+    font-size: 0.88em;
+    transform: scaleY(1.3);
 
-    &:before {
-        position: absolute;
-        z-index: -1;
-        text-shadow: 0.03em 0.03em #5b5b5b;
+    .text {
+        font-family: Arial;
+        font-weight: bold;
+        letter-spacing: 0.08em;
+        background: #9d9d9d;
+        background: @graydient;
+        background: -moz-linear-gradient(top,  #9d9d9d 0%, #ffffff 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#9d9d9d), color-stop(100%,#ffffff));
+        background: -webkit-linear-gradient(top,  #9d9d9d 0%,#ffffff 100%);
+        background: -o-linear-gradient(top,  #9d9d9d 0%,#ffffff 100%);
+        background: -ms-linear-gradient(top,  #9d9d9d 0%,#ffffff 100%);
+        background: linear-gradient(to bottom,  #9d9d9d 0%,#ffffff 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9d9d9d', endColorstr='#ffffff',GradientType=0 );
+        .textBg();
+
+        &:before {
+            position: absolute;
+            z-index: -1;
+            text-shadow: 0.03em 0.03em #5b5b5b;
+        }
     }
 }
 
 .outline {
     .transform (scale(1,1.2));
 
-    .text {    
+    .text {
         letter-spacing: -0.01em;
         font-family: Arial, sans-serif;
         font-weight: bold;
@@ -460,6 +489,7 @@ __      _____  ___ ___   _   ___ _____
 
 .radial {
     .transform (scale(1,1.2));
+    font-size: 1.15em;
 
     .text {
         background: #fffa28;
@@ -503,6 +533,7 @@ __      _____  ___ ___   _   ___ _____
 
 .chrome {
     .transform (scale(1,1.3));
+    font-size: 1.1em;
 
     .text {
         font-family: Times, 'Times New Roman', serif;
@@ -524,8 +555,8 @@ __      _____  ___ ___   _   ___ _____
 }
 
 .up {
-    .transform (skew(0, -15deg) scale(1, 1.4));
-    
+    .transform (skew(0, -15deg) scale(1, 1.4) translateY(25%));
+
     .text {
         letter-spacing: -0.04em;
         font-family: Arial, sans-serif;
@@ -535,7 +566,8 @@ __      _____  ___ ___   _   ___ _____
 }
 
 .purple {
-    .transform (skew(0, -10deg) scale(1, 1.5));
+    .transform (skew(0, -10deg) scale(1, 1.5) translateY(10%));
+    font-size: 1.15em;
 
     .text {
         letter-spacing: -0.01em;
@@ -556,13 +588,19 @@ __      _____  ___ ___   _   ___ _____
         &:before {
             position: absolute;
             z-index: -1;
-            text-shadow: 0.03em 0.03em 0px #828DFB;
+            text-shadow: 0.03em 0.03em 0 #828DFB;
         }
     }
 }
 
 .marble-slab {
-    .transform (skew(0, -10deg) scale(1, 1.2));
+    display: inline-block;
+    font-size: 1.23em;
+    .transform (scale(1,1.2)
+                perspective(1em)
+                rotateY(8deg)
+                rotateZ(-7deg)
+                translateX(3%) translateZ(-0.4em));
 
     .text {
         font-family: Arial, sans-serif;
@@ -620,7 +658,7 @@ __      _____  ___ ___   _   ___ _____
         letter-spacing: -0.01em;
         -webkit-text-stroke: 0.01em #A3A3A3;
         filter: progid:DXImageTransform.Microsoft.Glow(Color=#A3A3A3,Strength=1);
-        
+
         &:before {
             position: absolute;
             z-index: -1;
@@ -634,11 +672,11 @@ __      _____  ___ ___   _   ___ _____
 
 .yellow-dash {
     display: inline-block;
-    font-size: 1.4em; // compensate for translation
+    font-size: 1.65em; // compensate for translation
     .transform (perspective(1em)
                 rotateY(-6deg) rotateZ(-2deg)
                 scaleY(1.6)
-                translateX(-30%) translateZ(-0.4em));
+                translateX(-36%) translateZ(-0.4em));
 
     .text {
         letter-spacing: -0.03em;
@@ -687,6 +725,7 @@ __      _____  ___ ___   _   ___ _____
 
 .aqua {
     .transform(scaleY(1.3));
+    font-size: 1.1em;
 
     .text {
         letter-spacing: -0.01em;
@@ -712,6 +751,7 @@ __      _____  ___ ___   _   ___ _____
 
 .red-blue {
     .transform (scale(1,1.2));
+    font-size: 1.15em;
 
     .text {
         font-family: Impact, sans-serif;
@@ -790,7 +830,7 @@ __      _____  ___ ___   _   ___ _____
 
 .stack-3d {
     .stacked();
-    .transform (skew(0, 10deg) scaleY(0.75) translateY(-10%));
+    .transform (skew(0, 10deg) scaleY(0.75) translateY(-10%) translateX(16%));
 
     .text {
         font-family: Arial, sans-serif;
