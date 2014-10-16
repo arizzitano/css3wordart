@@ -241,6 +241,12 @@ __      _____ _  _ ___ ___
         //padding-top: 20px;
         vertical-align: middle;
         font-size: 22px;
+
+        .wrapper {
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+        }
     }
 
     .a6, .b6, .c6, .d6, .e6 {
@@ -400,7 +406,7 @@ __      _____  ___ ___   _   ___ _____
 }
 
 .superhero {
-    .transform (skew(0, -15deg) scale(1, 1.5) translateY(20%));
+    .transform (skew(0, -15deg) scale(1, 1.5));
     font-size: 1.12em;
 
     .text {
@@ -555,7 +561,7 @@ __      _____  ___ ___   _   ___ _____
 }
 
 .up {
-    .transform (skew(0, -15deg) scale(1, 1.4) translateY(25%));
+    .transform (skew(0, -15deg) scale(1, 1.4));
 
     .text {
         letter-spacing: -0.04em;
@@ -566,7 +572,7 @@ __      _____  ___ ___   _   ___ _____
 }
 
 .purple {
-    .transform (skew(0, -10deg) scale(1, 1.5) translateY(10%));
+    .transform (skew(0, -10deg) scale(1, 1.5));
     font-size: 1.15em;
 
     .text {
@@ -702,7 +708,7 @@ __      _____  ___ ___   _   ___ _____
                 rotateY(5deg)
                 skewY(20deg)
                 scaleY(1.2)
-                translateY(25%) translateZ(-0.4em));
+                translateZ(-0.4em));
 
     .text {
         font-family: Impact;
