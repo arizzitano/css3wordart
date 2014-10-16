@@ -17,12 +17,12 @@ gulp.task('less', function () {
         paths: [ path.join(__dirname, 'less', 'includes') ]
     }))
     .on('error', errorHandler)
-    .pipe(gulp.dest('./public/css'));
+    .pipe(gulp.dest('./css'));
 });
 
 gulp.task('connect', function() {
     connect.server({
-        root: './public'
+        root: '.'
     });
 });
 
