@@ -96,6 +96,7 @@ html, body {
 }
 
 .textBg {
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -238,18 +239,17 @@ __      _____ _  _ ___ ___
         background: #fff;
         padding: 2px;
         text-align: center;
-        //padding-top: 20px;
         vertical-align: middle;
         font-size: 22px;
 
         .wrapper {
             position: relative;
             top: 50%;
-            transform: translateY(-50%);
+            .transform(translateY(-50%));
         }
     }
 
-    .a6, .b6, .c6, .d6, .e6 {
+    .stack {
         padding: 0 0 0 15px;
         font-size: 1.1em;
         text-align: left;
@@ -282,6 +282,10 @@ __      _____  ___ ___   _   ___ _____
     display: block;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
+    .text {
+        display: block;
+    }
 }
 
 .wordart > .text:before, .wordart > .text:after {
@@ -291,10 +295,6 @@ __      _____  ___ ___   _   ___ _____
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-}
-
-[data-text]:before {
-    content: attr(data-text);
 }
 
 .rainbow {
@@ -318,6 +318,7 @@ __      _____  ___ ___   _   ___ _____
         margin-left: 0.7em;
 
         &:before {
+            content: attr(data-text);
             position: absolute;
             z-index: -1;
             top: 0.17em;
@@ -341,6 +342,7 @@ __      _____  ___ ___   _   ___ _____
         color: rgba(178, 202, 189, 0.7);
 
         &:before {
+            content: attr(data-text);
             background: #1f4427;
             position: absolute;
             background: @green-marble;
@@ -368,6 +370,7 @@ __      _____  ___ ___   _   ___ _____
     .textBg();
 
     &:before {
+        content: attr(data-text);
         .text3d(0.1, #161616, #8d8d8d);
     }
 }
@@ -400,6 +403,7 @@ __      _____  ___ ___   _   ___ _____
         .textBg();
 
         &:before {
+            content: attr(data-text);
             .text3d(0.08, #081A33, #114491, -1, -1);
         }
     }
@@ -423,6 +427,7 @@ __      _____  ___ ___   _   ___ _____
         .textBg();
 
         &:before {
+            content: attr(data-text);
             .text3d(0.08, #802700, #c23d00);
         }
     }
@@ -448,6 +453,7 @@ __      _____  ___ ___   _   ___ _____
         .textBg();
 
         &:before {
+            content: attr(data-text);
             position: absolute;
             z-index: -1;
             text-shadow: 0.03em 0.03em #5b5b5b;
@@ -512,6 +518,7 @@ __      _____  ___ ___   _   ___ _____
         font-weight: bold;
 
         &:before {
+            content: attr(data-text);
             position: absolute;
             z-index: -1;
             text-shadow: 0.03em 0.03em 0px #B3B3B3;
@@ -530,6 +537,7 @@ __      _____  ___ ___   _   ___ _____
         .textBg();
 
         &:before {
+            content: attr(data-text);
             position: absolute;
             z-index: -1;
             text-shadow: 0.06em 0 0px #130C02;
@@ -555,6 +563,7 @@ __      _____  ___ ___   _   ___ _____
         .textBg();
 
         &:before {
+            content: attr(data-text);
             .text3d(0.06, #2B2B2B, #6D6D6D, -1, -1);
         }
     }
@@ -592,6 +601,7 @@ __      _____  ___ ___   _   ___ _____
         .textBg();
 
         &:before {
+            content: attr(data-text);
             position: absolute;
             z-index: -1;
             text-shadow: 0.03em 0.03em 0 #828DFB;
@@ -615,6 +625,7 @@ __      _____  ___ ___   _   ___ _____
         .textBg();
 
         &:before {
+            content: attr(data-text);
             .text3d(0.2, #030B00, #1E4100, -1, -1);
         }
     }
@@ -633,6 +644,7 @@ __      _____  ___ ___   _   ___ _____
         .textBg();
 
         &:before {
+            content: attr(data-text);
             position: absolute;
             z-index: -1;
             text-shadow: 0.03em 0.03em 0 #828DFB;
@@ -666,6 +678,7 @@ __      _____  ___ ___   _   ___ _____
         filter: progid:DXImageTransform.Microsoft.Glow(Color=#A3A3A3,Strength=1);
 
         &:before {
+            content: attr(data-text);
             position: absolute;
             z-index: -1;
             top: 0.17em;
@@ -694,6 +707,7 @@ __      _____  ___ ___   _   ___ _____
         .textBg();
 
         &:before {
+            content: attr(data-text);
             position: absolute;
             z-index: -1;
             text-shadow: 0.04em 0.04em 0 #6d6d6d;
@@ -724,6 +738,7 @@ __      _____  ___ ___   _   ___ _____
         .textBg();
 
         &:before {
+            content: attr(data-text);
             .text3d(0.3, #60614B, #27271F, -1, 1);
         }
     }
@@ -748,6 +763,7 @@ __      _____  ___ ___   _   ___ _____
         .textBg();
 
         &:before {
+            content: attr(data-text);
             position: absolute;
             z-index: -1;
             text-shadow: 0.04em 0.04em 0 #B3B3B3;
@@ -767,6 +783,7 @@ __      _____  ___ ___   _   ___ _____
         filter: progid:DXImageTransform.Microsoft.Glow(Color=#91C2FC,Strength=1);
 
         &:before {
+            content: attr(data-text);
             position: absolute;
             z-index: -1;
             text-shadow: 0.04em 0.04em 0 #771515;
@@ -793,6 +810,7 @@ __      _____  ___ ___   _   ___ _____
         color: #601111;
 
         &:before {
+            content: attr(data-text);
             position: absolute;
             z-index: -1;
             text-shadow: 0.05em 0.05em 0 #adadad;
@@ -810,6 +828,7 @@ __      _____  ___ ___   _   ___ _____
         .textBg();
 
         &:before {
+            content: attr(data-text);
             position: absolute;
             z-index: -1;
             text-shadow: 0.04em 0.04em 0 #b5b5b5;
@@ -827,6 +846,7 @@ __      _____  ___ ___   _   ___ _____
         color: #71F504;
 
         &:before {
+            content: attr(data-text);
             position: absolute;
             z-index: -1;
             text-shadow: -0.09em 0.09em 0 #00116B;
@@ -844,6 +864,7 @@ __      _____  ___ ___   _   ___ _____
         color: #4E0E0E;
 
         &:before {
+            content: attr(data-text);
             .text3d(0.2, #7C3E2C, #E8703C, -1, 1);
         }
     }
