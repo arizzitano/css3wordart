@@ -10,31 +10,58 @@
         <h3 class="title">WordArt Gallery</h3>
         <p>Select a <span class="hk">W</span>ordArt Style:</p>
         <ul class="gallery-thumbs" id="galleryThumbs"></ul>
-        <button class="bevel ok">OK</button>
-        <button class="bevel cancel">Cancel</button>
-    </section>
+        <div class="button-box right">
+            <button class="bevel ok">OK</button>
+            <button class="bevel cancel">Cancel</button>
+        </div>
 
-    <template id="galleryTemplate">
-        <li>
-            <div class="wrapper">
+        <template id="galleryTemplate">
+            <li>
+                <div class="wrapper">
+                    <div class="wordart">
+                        <span class="text" data-text="WordArt">WordArt</span>
+                    </div>
+                </div>
+            </li>
+        </template>
+
+        <template id="galleryStackedTemplate">
+            <li class="stack">
                 <div class="wordart">
                     <span class="text" data-text="WordArt">WordArt</span>
                 </div>
-            </div>
-        </li>
-    </template>
-
-    <template id="galleryStackedTemplate">
-        <li class="stack">
-            <div class="wordart">
-                <span class="text" data-text="WordArt">WordArt</span>
-            </div>
-            <div class="highlight">
-                <div class="wordart">
-                    <span class="text" data-text="W">W</span>
+                <div class="highlight">
+                    <div class="wordart">
+                        <span class="text" data-text="W">W</span>
+                    </div>
                 </div>
-            </div>
-        </li>
-    </template>
+            </li>
+        </template>
+    </section>
+
+    <section class="dialog editor bevel">
+        <h3 class="title">Edit WordArt Text</h3>
+        <!--<div class="form-element font">
+            <label><span class="hk">F</span>ont</label>
+            <select class="font-menu"></select>
+        </div>
+        <div class="form-element size">
+            <label><span class="hk">S</span>ize</label>
+        </div>
+        <div class="form-element text-style">
+            <button class="bevel bold">B</button>
+            <button class="bevel italic">I</button>
+        </div>-->
+        <div class="form-element text-box">
+            <label><span class="hk">S</span>ize</label>
+            <span class="inset">
+                <textarea>Your Text Here</textarea>
+            </span>
+        </div>
+        <div class="button-box right">
+            <button class="bevel ok">OK</button>
+            <button class="bevel cancel">Cancel</button>
+        </div>
+    </section>
 </body>
 </html>
