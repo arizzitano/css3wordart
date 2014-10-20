@@ -91,6 +91,7 @@ __      _____ _  _ ___ ___
   background: #b3b3b3;
   padding: 4px;
   font-size: 14px;
+  display: none;
 }
 .dialog > .title {
   background: #00006f;
@@ -271,6 +272,7 @@ __      _____ _  _ ___ ___
   padding: 2px;
 }
 .text-box textarea {
+  font-size: 36px;
   padding-left: 5px;
   line-height: 1.4em;
   position: relative;
