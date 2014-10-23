@@ -42,12 +42,12 @@
 	};
 
 	Gallery.prototype.open = function () {
+		this.selectedStyle = this.classes[0];
 		this.el.style.display = 'block';
 	};
 
 	Gallery.prototype.close = function () {
 		this.el.style.display = 'none';
-		this.selectedStyle = this.classes[0];
 	};
 
 	Gallery.prototype.bindHandlers = function () {
@@ -82,6 +82,8 @@
 	};
 
 	Editor.prototype.open = function () {
+		this.el.querySelector('textarea').value = this.defaultTxt;
+		this.el.querySelector('textarea').select();
 		this.el.style.display = 'block';
 	};
 
@@ -101,6 +103,62 @@
 		});
 	};
 
+	function WordArt (p, s, t) {
+		this.parentObject = p;
+		this.selectedStyle = s;
+		this.txt = t;
+		this.el = document.querySelector('.resize');
+		this.bcr = this.el.getBoundingClientRect();
+		this.wordArtObj = null;
+	}
+
+	WordArt.prototype.init = function () {
+		this.render();
+		this.open();
+	};
+
+	WordArt.prototype.render = function () {
+		var tmpl = this.el.querySelector('#finalWordart');
+		var clone = tmpl.content.cloneNode(true);
+		var wa = clone.querySelector('.wordart');
+		var span = wa.querySelector('span');
+		wa.className = wa.className + ' ' + this.selectedStyle;
+		span.setAttribute('data-text', this.txt);
+		span.innerHTML = this.txt;
+		this.el.querySelector('.stage').appendChild(clone);
+		this.wordArtObj = clone.querySelector('.resizable');
+		this.position();
+	};
+
+	WordArt.prototype.position = function () {
+		var self = this;
+		var resizable = self.el.querySelector('.stage .resizable');
+		var wrapper = resizable.querySelector('.wrapper');
+		var wa = wrapper.querySelector('.wordart');
+		var waClientRect = wa.getBoundingClientRect();
+
+		function queryClientRect () {
+			waClientRect = self.el.querySelector('.stage .wordart').getBoundingClientRect();
+			resizableClientRect = resizable.getBoundingClientRect();
+			if (waClientRect.width === 0) {
+				setTimeout(queryClientRect, 5);
+			} else {
+				resizable.style.width = (waClientRect.left - resizableClientRect.left) +
+										waClientRect.width + 2 + 'px';
+				resizable.style.height = waClientRect.height + 2 + 'px';
+			}
+		}
+		setTimeout(queryClientRect, 5);
+	};
+
+	WordArt.prototype.open = function () {
+		this.el.style.display = 'block';
+	};
+
+	WordArt.prototype.close = function () {
+		this.el.style.display = 'none';
+		// destroy existing wordart objects
+	};
 
 
 	function WordArtMaker () {
@@ -108,6 +166,7 @@
 		this.selectedStyle = null;
 		this.editor = null;
 		this.txt = null;
+		this.wordArt = null;
 	}
 
 	WordArtMaker.prototype.init = function () {
@@ -122,8 +181,8 @@
 
 	WordArtMaker.prototype.displayWordArt = function (txt) {
 		this.txt = txt;
-		console.log(this.txt);
-		console.log(this.selectedStyle);
+		this.wordArt = new WordArt(this, this.selectedStyle, this.txt);
+		this.wordArt.init();
 	};
 
 	document.addEventListener('DOMContentLoaded', function () {
