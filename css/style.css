@@ -53,11 +53,12 @@ body {
   -webkit-text-fill-color: transparent;
 }
 .stacked {
-  transform: scaleY(0.75) translateY(-10%);
-  -webkit-transform: scaleY(0.75) translateY(-10%);
-  -moz-transform: scaleY(0.75) translateY(-10%);
-  -o-transform: scaleY(0.75) translateY(-10%);
-  -ms-transform: scaleY(0.75) translateY(-10%);
+  transform: scaleY(0.75);
+  -webkit-transform: scaleY(0.75);
+  -moz-transform: scaleY(0.75);
+  -o-transform: scaleY(0.75);
+  -ms-transform: scaleY(0.75);
+  transform-origin: 0 50% 0;
   display: inline-block;
   text-align: center;
   vertical-align: top;
@@ -232,7 +233,7 @@ __      _____ _  _ ___ ___
   border-color: #000;
 }
 .gallery-thumbs .stack {
-  padding: 0 0 0 15px;
+  padding-left: 15px;
   font-size: 1.1em;
   text-align: left;
 }
@@ -247,6 +248,9 @@ __      _____ _  _ ___ ___
   border-bottom: 1px solid #acacac;
   font-size: 2em;
   padding-left: 3px;
+}
+.gallery-thumbs .stack > .wordart {
+  margin-top: -10px;
 }
 /* -------------------------------------
  ___ ___ ___ _____ ___  ___
@@ -294,7 +298,7 @@ __      _____ _  _ ___ ___
   padding: 11px;
   height: 430px;
 }
-.resize .container .stage {
+.resize .container .window {
   position: relative;
   border-top: 2px solid #6d6d6d;
   border-right: 2px solid #fff;
@@ -305,7 +309,7 @@ __      _____ _  _ ___ ___
   width: 100%;
   height: 100%;
 }
-.resize .container .stage:before {
+.resize .container .window:before {
   position: absolute;
   display: block;
   content: '';
@@ -317,6 +321,12 @@ __      _____ _  _ ___ ___
   left: 0;
   right: 0;
   bottom: 0;
+}
+.resize .container .stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
 }
 .resize .container .resizable {
   position: absolute;
@@ -372,6 +382,8 @@ __      _____ _  _ ___ ___
 }
 .resize .container .wordart {
   font-size: 60px;
+}
+.resize .container .wordart:not(.basic-stack):not(.brown-stack):not(.green-stack):not(.texture-stack):not(.stack-3d) {
   white-space: nowrap;
 }
 /* -------------------------------------
@@ -757,11 +769,11 @@ __      _____  ___ ___   _   ___ _____
 .marble-slab {
   display: inline-block;
   font-size: 1.23em;
-  transform: scale(1, 1.2) perspective(1em) rotateY(8deg) rotateZ(-7deg) translateX(3%) translateZ(-0.4em);
-  -webkit-transform: scale(1, 1.2) perspective(1em) rotateY(8deg) rotateZ(-7deg) translateX(3%) translateZ(-0.4em);
-  -moz-transform: scale(1, 1.2) perspective(1em) rotateY(8deg) rotateZ(-7deg) translateX(3%) translateZ(-0.4em);
-  -o-transform: scale(1, 1.2) perspective(1em) rotateY(8deg) rotateZ(-7deg) translateX(3%) translateZ(-0.4em);
-  -ms-transform: scale(1, 1.2) perspective(1em) rotateY(8deg) rotateZ(-7deg) translateX(3%) translateZ(-0.4em);
+  transform: scale(1, 1.2) perspective(1em) rotateY(8deg) rotateZ(-7deg) translateX(6%) translateZ(-0.4em);
+  -webkit-transform: scale(1, 1.2) perspective(1em) rotateY(8deg) rotateZ(-7deg) translateX(6%) translateZ(-0.4em);
+  -moz-transform: scale(1, 1.2) perspective(1em) rotateY(8deg) rotateZ(-7deg) translateX(6%) translateZ(-0.4em);
+  -o-transform: scale(1, 1.2) perspective(1em) rotateY(8deg) rotateZ(-7deg) translateX(6%) translateZ(-0.4em);
+  -ms-transform: scale(1, 1.2) perspective(1em) rotateY(8deg) rotateZ(-7deg) translateX(6%) translateZ(-0.4em);
 }
 .marble-slab .text {
   font-family: Arial, sans-serif;
@@ -845,11 +857,12 @@ __      _____  ___ ___   _   ___ _____
 .yellow-dash {
   display: inline-block;
   font-size: 1.65em;
-  transform: perspective(1em) rotateY(-6deg) rotateZ(-2deg) scaleY(1.6) translateX(-36%) translateZ(-0.4em);
-  -webkit-transform: perspective(1em) rotateY(-6deg) rotateZ(-2deg) scaleY(1.6) translateX(-36%) translateZ(-0.4em);
-  -moz-transform: perspective(1em) rotateY(-6deg) rotateZ(-2deg) scaleY(1.6) translateX(-36%) translateZ(-0.4em);
-  -o-transform: perspective(1em) rotateY(-6deg) rotateZ(-2deg) scaleY(1.6) translateX(-36%) translateZ(-0.4em);
-  -ms-transform: perspective(1em) rotateY(-6deg) rotateZ(-2deg) scaleY(1.6) translateX(-36%) translateZ(-0.4em);
+  transform-origin: 0 0 0;
+  transform: perspective(1em) rotateY(-6deg) rotateZ(-4deg) scaleY(1.6) translateY(10%) translateZ(-1.1em);
+  -webkit-transform: perspective(1em) rotateY(-6deg) rotateZ(-4deg) scaleY(1.6) translateY(10%) translateZ(-1.1em);
+  -moz-transform: perspective(1em) rotateY(-6deg) rotateZ(-4deg) scaleY(1.6) translateY(10%) translateZ(-1.1em);
+  -o-transform: perspective(1em) rotateY(-6deg) rotateZ(-4deg) scaleY(1.6) translateY(10%) translateZ(-1.1em);
+  -ms-transform: perspective(1em) rotateY(-6deg) rotateZ(-4deg) scaleY(1.6) translateY(10%) translateZ(-1.1em);
 }
 .yellow-dash .text {
   letter-spacing: -0.03em;
@@ -950,11 +963,12 @@ __      _____  ___ ___   _   ___ _____
   text-shadow: 0.04em 0.04em 0 #771515;
 }
 .basic-stack {
-  transform: scaleY(0.75) translateY(-10%);
-  -webkit-transform: scaleY(0.75) translateY(-10%);
-  -moz-transform: scaleY(0.75) translateY(-10%);
-  -o-transform: scaleY(0.75) translateY(-10%);
-  -ms-transform: scaleY(0.75) translateY(-10%);
+  transform: scaleY(0.75);
+  -webkit-transform: scaleY(0.75);
+  -moz-transform: scaleY(0.75);
+  -o-transform: scaleY(0.75);
+  -ms-transform: scaleY(0.75);
+  transform-origin: 0 50% 0;
   display: inline-block;
   text-align: center;
   vertical-align: top;
@@ -979,11 +993,12 @@ __      _____  ___ ___   _   ___ _____
   font-weight: bold;
 }
 .brown-stack {
-  transform: scaleY(0.75) translateY(-10%);
-  -webkit-transform: scaleY(0.75) translateY(-10%);
-  -moz-transform: scaleY(0.75) translateY(-10%);
-  -o-transform: scaleY(0.75) translateY(-10%);
-  -ms-transform: scaleY(0.75) translateY(-10%);
+  transform: scaleY(0.75);
+  -webkit-transform: scaleY(0.75);
+  -moz-transform: scaleY(0.75);
+  -o-transform: scaleY(0.75);
+  -ms-transform: scaleY(0.75);
+  transform-origin: 0 50% 0;
   display: inline-block;
   text-align: center;
   vertical-align: top;
@@ -1016,11 +1031,12 @@ __      _____  ___ ___   _   ___ _____
   text-shadow: 0.05em 0.05em 0 #adadad;
 }
 .texture-stack {
-  transform: scaleY(0.75) translateY(-10%);
-  -webkit-transform: scaleY(0.75) translateY(-10%);
-  -moz-transform: scaleY(0.75) translateY(-10%);
-  -o-transform: scaleY(0.75) translateY(-10%);
-  -ms-transform: scaleY(0.75) translateY(-10%);
+  transform: scaleY(0.75);
+  -webkit-transform: scaleY(0.75);
+  -moz-transform: scaleY(0.75);
+  -o-transform: scaleY(0.75);
+  -ms-transform: scaleY(0.75);
+  transform-origin: 0 50% 0;
   display: inline-block;
   text-align: center;
   vertical-align: top;
@@ -1055,11 +1071,12 @@ __      _____  ___ ___   _   ___ _____
   text-shadow: 0.04em 0.04em 0 #b5b5b5;
 }
 .green-stack {
-  transform: scaleY(0.75) translateY(-10%);
-  -webkit-transform: scaleY(0.75) translateY(-10%);
-  -moz-transform: scaleY(0.75) translateY(-10%);
-  -o-transform: scaleY(0.75) translateY(-10%);
-  -ms-transform: scaleY(0.75) translateY(-10%);
+  transform: scaleY(0.75);
+  -webkit-transform: scaleY(0.75);
+  -moz-transform: scaleY(0.75);
+  -o-transform: scaleY(0.75);
+  -ms-transform: scaleY(0.75);
+  transform-origin: 0 50% 0;
   display: inline-block;
   text-align: center;
   vertical-align: top;
@@ -1067,11 +1084,11 @@ __      _____  ___ ___   _   ___ _____
   width: 1em;
   word-wrap: break-word;
   letter-spacing: 0.27em;
-  transform: skew(0, -10deg) scaleY(0.75) translateY(-10%);
-  -webkit-transform: skew(0, -10deg) scaleY(0.75) translateY(-10%);
-  -moz-transform: skew(0, -10deg) scaleY(0.75) translateY(-10%);
-  -o-transform: skew(0, -10deg) scaleY(0.75) translateY(-10%);
-  -ms-transform: skew(0, -10deg) scaleY(0.75) translateY(-10%);
+  transform: skew(0, -10deg) scaleY(0.75);
+  -webkit-transform: skew(0, -10deg) scaleY(0.75);
+  -moz-transform: skew(0, -10deg) scaleY(0.75);
+  -o-transform: skew(0, -10deg) scaleY(0.75);
+  -ms-transform: skew(0, -10deg) scaleY(0.75);
 }
 .green-stack .text {
   display: block;
@@ -1096,11 +1113,12 @@ __      _____  ___ ___   _   ___ _____
   text-shadow: -0.09em 0.09em 0 #00116b;
 }
 .stack-3d {
-  transform: scaleY(0.75) translateY(-10%);
-  -webkit-transform: scaleY(0.75) translateY(-10%);
-  -moz-transform: scaleY(0.75) translateY(-10%);
-  -o-transform: scaleY(0.75) translateY(-10%);
-  -ms-transform: scaleY(0.75) translateY(-10%);
+  transform: scaleY(0.75);
+  -webkit-transform: scaleY(0.75);
+  -moz-transform: scaleY(0.75);
+  -o-transform: scaleY(0.75);
+  -ms-transform: scaleY(0.75);
+  transform-origin: 0 50% 0;
   display: inline-block;
   text-align: center;
   vertical-align: top;
@@ -1108,11 +1126,11 @@ __      _____  ___ ___   _   ___ _____
   width: 1em;
   word-wrap: break-word;
   letter-spacing: 0.27em;
-  transform: skew(0, 10deg) scaleY(0.75) translateY(-10%) translateX(16%);
-  -webkit-transform: skew(0, 10deg) scaleY(0.75) translateY(-10%) translateX(16%);
-  -moz-transform: skew(0, 10deg) scaleY(0.75) translateY(-10%) translateX(16%);
-  -o-transform: skew(0, 10deg) scaleY(0.75) translateY(-10%) translateX(16%);
-  -ms-transform: skew(0, 10deg) scaleY(0.75) translateY(-10%) translateX(16%);
+  transform: skew(0, 10deg) scaleY(0.75) translateX(16%);
+  -webkit-transform: skew(0, 10deg) scaleY(0.75) translateX(16%);
+  -moz-transform: skew(0, 10deg) scaleY(0.75) translateX(16%);
+  -o-transform: skew(0, 10deg) scaleY(0.75) translateX(16%);
+  -ms-transform: skew(0, 10deg) scaleY(0.75) translateX(16%);
 }
 .stack-3d .text {
   display: block;

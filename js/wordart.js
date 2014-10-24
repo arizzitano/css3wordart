@@ -104,6 +104,7 @@
 	};
 
 	function WordArt (p, s, t) {
+		this.verticalStyles = ['basic-stack','brown-stack','green-stack','texture-stack','stack-3d'];
 		this.parentObject = p;
 		this.selectedStyle = s;
 		this.txt = t;
@@ -125,6 +126,11 @@
 		wa.className = wa.className + ' ' + this.selectedStyle;
 		span.setAttribute('data-text', this.txt);
 		span.innerHTML = this.txt;
+		// this is very hacky and bad; fix it pls
+		if (this.verticalStyles.indexOf(this.selectedStyle) > -1) {
+			var wrapper = clone.querySelector('.wrapper');
+			wrapper.className = wrapper.className + ' vertical';
+		}
 		this.el.querySelector('.stage').appendChild(clone);
 		this.wordArtObj = clone.querySelector('.resizable');
 		this.position();
@@ -143,12 +149,18 @@
 			if (waClientRect.width === 0) {
 				setTimeout(queryClientRect, 5);
 			} else {
-				resizable.style.width = (waClientRect.left - resizableClientRect.left) +
+				[resizable].forEach(function (el) {
+					el.style.width = (waClientRect.left - resizableClientRect.left) +
 										waClientRect.width + 2 + 'px';
-				resizable.style.height = waClientRect.height + 2 + 'px';
+					el.style.height = waClientRect.height + 2 + 'px';
+				});
 			}
 		}
 		setTimeout(queryClientRect, 5);
+	};
+
+	WordArt.prototype.move = function () {
+
 	};
 
 	WordArt.prototype.open = function () {

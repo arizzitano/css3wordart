@@ -102,7 +102,8 @@ html, body {
 }
 
 .stacked {
-    .transform(scaleY(0.75) translateY(-10%));
+    .transform(scaleY(0.75));
+    transform-origin: 0 50% 0;
     display: inline-block;
     text-align: center;
     vertical-align: top;
@@ -276,7 +277,7 @@ __      _____ _  _ ___ ___
     }
 
     .stack {
-        padding: 0 0 0 15px;
+        padding-left: 15px;
         font-size: 1.1em;
         text-align: left;
 
@@ -291,6 +292,10 @@ __      _____ _  _ ___ ___
             border-bottom: 1px solid #acacac;
             font-size: 2em;
             padding-left: 3px;
+        }
+
+        & > .wordart {
+            margin-top: -10px;
         }
     }
 }
@@ -349,11 +354,18 @@ __      _____ _  _ ___ ___
     padding: 11px;
     height: 430px;
 
-    .stage {
+    .window {
         .inset();
         background: #fff;
         width: 100%;
         height: 100%;
+    }
+
+    .stage {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: scroll;
     }
 
     .resizable {
@@ -385,11 +397,17 @@ __      _____ _  _ ___ ___
         position: relative;
         top: 50%;
         .transform(translateY(-50%));
+
+        // &.vertical {
+        //     display: inline;
+        // }
     }
 
     .wordart {
         font-size: 60px;
-        white-space: nowrap; // fix this
+        &:not(.basic-stack):not(.brown-stack):not(.green-stack):not(.texture-stack):not(.stack-3d) {
+            white-space: nowrap; // fix this
+        }
     }
 }
 
@@ -740,7 +758,7 @@ __      _____  ___ ___   _   ___ _____
                 perspective(1em)
                 rotateY(8deg)
                 rotateZ(-7deg)
-                translateX(3%) translateZ(-0.4em));
+                translateX(6%) translateZ(-0.4em));
 
     .text {
         font-family: Arial, sans-serif;
@@ -816,10 +834,11 @@ __      _____  ___ ___   _   ___ _____
 .yellow-dash {
     display: inline-block;
     font-size: 1.65em; // compensate for translation
+    transform-origin: 0 0 0;
     .transform (perspective(1em)
-                rotateY(-6deg) rotateZ(-2deg)
+                rotateY(-6deg) rotateZ(-4deg)
                 scaleY(1.6)
-                translateX(-36%) translateZ(-0.4em));
+                translateY(10%) translateZ(-1.1em));
 
     .text {
         letter-spacing: -0.03em;
@@ -962,7 +981,7 @@ __      _____  ___ ___   _   ___ _____
 
 .green-stack {
     .stacked();
-    .transform (skew(0, -10deg) scaleY(0.75) translateY(-10%));
+    .transform (skew(0, -10deg) scaleY(0.75));
 
     .text {
         font-family: Arial, sans-serif;
@@ -980,7 +999,7 @@ __      _____  ___ ___   _   ___ _____
 
 .stack-3d {
     .stacked();
-    .transform (skew(0, 10deg) scaleY(0.75) translateY(-10%) translateX(16%));
+    .transform (skew(0, 10deg) scaleY(0.75) translateX(16%));
 
     .text {
         font-family: Arial, sans-serif;
