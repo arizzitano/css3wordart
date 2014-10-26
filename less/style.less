@@ -370,6 +370,8 @@ __      _____ _  _ ___ ___
 
     .resizable {
         position: absolute;
+        top: 0;
+        left: 0;
 
         &.active {
             border: 1px dashed #444;
@@ -397,10 +399,6 @@ __      _____ _  _ ___ ___
         position: relative;
         top: 50%;
         .transform(translateY(-50%));
-
-        // &.vertical {
-        //     display: inline;
-        // }
     }
 
     .wordart {
@@ -424,6 +422,10 @@ __      _____  ___ ___   _   ___ _____
     display: inline-block;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 
     .text {
         display: block;

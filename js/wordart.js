@@ -109,62 +109,96 @@
 		this.selectedStyle = s;
 		this.txt = t;
 		this.el = document.querySelector('.resize');
-		this.bcr = this.el.getBoundingClientRect();
+		this.bcr = this.el.querySelector('.stage').getBoundingClientRect();
+
+		this.resizable = null;
+		this.rcr = null;
 		this.wordArtObj = null;
+		this.wcr = null;
+
+		this.position = {
+			left: 0,
+			top: 0
+		};
+		this.startPosition = {};
+
+		this.size = {};
 	}
 
 	WordArt.prototype.init = function () {
 		this.render();
 		this.open();
+		this.bindHandlers();
 	};
 
 	WordArt.prototype.render = function () {
-		var tmpl = this.el.querySelector('#finalWordart');
+		var self = this;
+		var tmpl = self.el.querySelector('#finalWordart');
 		var clone = tmpl.content.cloneNode(true);
 		var wa = clone.querySelector('.wordart');
 		var span = wa.querySelector('span');
-		wa.className = wa.className + ' ' + this.selectedStyle;
-		span.setAttribute('data-text', this.txt);
-		span.innerHTML = this.txt;
-		// this is very hacky and bad; fix it pls
-		if (this.verticalStyles.indexOf(this.selectedStyle) > -1) {
-			var wrapper = clone.querySelector('.wrapper');
-			wrapper.className = wrapper.className + ' vertical';
-		}
-		this.el.querySelector('.stage').appendChild(clone);
-		this.wordArtObj = clone.querySelector('.resizable');
-		this.position();
+		wa.className = wa.className + ' ' + self.selectedStyle;
+		span.setAttribute('data-text', self.txt);
+		span.innerHTML = self.txt;
+
+		self.resizable = clone.querySelector('.resizable');
+		self.wordArtObj = self.resizable.querySelector('.wordart');
+
+		self.el.querySelector('.stage').appendChild(clone);
+		setTimeout(function () {
+			self.resize();
+		}, 5);
 	};
 
-	WordArt.prototype.position = function () {
-		var self = this;
-		var resizable = self.el.querySelector('.stage .resizable');
-		var wrapper = resizable.querySelector('.wrapper');
-		var wa = wrapper.querySelector('.wordart');
-		var waClientRect = wa.getBoundingClientRect();
-
-		function queryClientRect () {
-			waClientRect = self.el.querySelector('.stage .wordart').getBoundingClientRect();
-			resizableClientRect = resizable.getBoundingClientRect();
-			if (waClientRect.width === 0) {
-				setTimeout(queryClientRect, 5);
-			} else {
-				[resizable].forEach(function (el) {
-					el.style.width = (waClientRect.left - resizableClientRect.left) +
-										waClientRect.width + 2 + 'px';
-					el.style.height = waClientRect.height + 2 + 'px';
-				});
-			}
-		}
-		setTimeout(queryClientRect, 5);
+	WordArt.prototype.resize = function () {
+		this.wcr = this.wordArtObj.getBoundingClientRect();
+		this.rcr = this.resizable.getBoundingClientRect();
+		this.size.width = (this.wcr.left - this.rcr.left) +
+								this.wcr.width + 2;
+		this.size.height = this.wcr.height + 2;
+		this.rcr = this.resizable.getBoundingClientRect();
+		this.bcr = this.el.querySelector('.stage').getBoundingClientRect();
 	};
 
-	WordArt.prototype.move = function () {
-
+	WordArt.prototype.move = function (e) {
+		var newY = parseFloat(this.position.top) + e.movementY;
+		if (newY > -1 && (newY + this.rcr.height) < this.bcr.height) {
+			this.position.top = newY;
+		}
+		this.position.left = parseFloat(this.position.left) + e.movementX;
 	};
 
 	WordArt.prototype.open = function () {
 		this.el.style.display = 'block';
+	};
+
+	WordArt.prototype.bindHandlers = function () {
+		var self = this;
+
+		// event handlers
+		self.wordArtObj.addEventListener('mousedown', function (e) {
+			self.isDragging = true;
+		});
+		document.addEventListener('mouseup', function (e) {
+			self.isDragging = false;
+		});
+		self.el.addEventListener('mousemove', function (e) {
+			if (self.isDragging) {
+				self.move(e);
+			}
+		});
+
+		// size handlers
+		Object.observe(self.size, function (changes) {
+			changes.forEach(function (c) {
+				self.resizable.style[c.name] = c.object[c.name] + 'px';
+			});
+		});
+		Object.observe(self.position, function (changes) {
+			changes.forEach(function (c) {
+				self.resizable.style[c.name] = c.object[c.name] + 'px';
+			});
+		});
 	};
 
 	WordArt.prototype.close = function () {

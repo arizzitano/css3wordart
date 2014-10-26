@@ -330,6 +330,8 @@ __      _____ _  _ ___ ___
 }
 .resize .container .resizable {
   position: absolute;
+  top: 0;
+  left: 0;
 }
 .resize .container .resizable.active {
   border: 1px dashed #444;
@@ -399,6 +401,10 @@ __      _____  ___ ___   _   ___ _____
   display: inline-block;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 .wordart .text {
   display: block;
