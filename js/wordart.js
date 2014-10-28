@@ -141,7 +141,7 @@
 	}
 
 	WordArt.prototype.init = function () {
-		//this.genDeltas();
+		this.genDeltas();
 		this.render();
 		this.open();
 		this.bindHandlers();
@@ -190,77 +190,43 @@
 		}
 	};
 
-	// WordArt.prototype.genDeltas = function () {
-	// 	var self = this;
-	// 	[{
-	// 		sizeProp: 'width',
-	// 		posProp: 'left',
-	// 		axis: 'x',
-	// 		edgeClass: 'w'
-	// 	}, {
-	// 		sizeProp: 'height',
-	// 		posProp: 'top',
-	// 		axis: 'y',
-	// 		edgeClass: 'n'
-	// 	}].forEach(function (args) {
-	// 		self['scale' + args.axis] = function (change) {
-	// 			var self = this;
-	// 			var classes = self.resizeHandle.className;
-	// 			var delta = change;
-	// 			var posDelta = 0;
-	// 			if (classes.indexOf((args.axis + 'c')) > -1) {
-	// 				delta = 0;
-	// 			} else if (classes.indexOf(args.edgeClass) > -1) {
-	// 				posDelta = delta = delta;
-	// 			}
-	// 			var newSize = self.rescale.size[args.sizeProp] + delta;
-	// 			var newPos = self.position[args.posProp] + posDelta;
-	// 			if ((newPos + newSize) < self.scr[args.sizeProp] && newPos > -1) {
-	// 				self.position[args.posProp] = newPos;
-	// 				self.rescale.size[args.sizeProp] = newSize;
-	// 			}
-	// 		};
-	// 	});
-	// }
+	WordArt.prototype.genDeltas = function () {
+		var self = this;
+		[{
+			sizeProp: 'width',
+			posProp: 'left',
+			axis: 'x',
+			edgeClass: 'w'
+		}, {
+			sizeProp: 'height',
+			posProp: 'top',
+			axis: 'y',
+			edgeClass: 'n'
+		}].forEach(function (args) {
+			self['scale' + args.axis] = function (change) {
+				var self = this;
+				var classes = self.resizeHandle.className;
+				var delta = change;
+				var posDelta = 0;
+				if (classes.indexOf((args.axis + 'c')) > -1) {
+					delta = 0;
+				} else if (classes.indexOf(args.edgeClass) > -1) {
+					posDelta = delta;
+					delta = -delta;
+				}
+				var newSize = self.rescale.size[args.sizeProp] + delta;
+				var newPos = self.position[args.posProp] + posDelta;
+				if ((newPos + newSize) < self.scr[args.sizeProp] && newPos > -1) {
+					self.position[args.posProp] = newPos;
+					self.rescale.size[args.sizeProp] = newSize;
+				}
+			};
+		});
+	};
 
 	WordArt.prototype.resize = function (e) {
-		var classes = this.resizeHandle.className;
-
-		var dh = e.movementY;
-		var dy = 0;
-		if (classes.indexOf('yc') > -1) {
-			dh = 0;
-		} else if (classes.indexOf('n') > -1) {
-			dh = -dh;
-			dy = -dh;
-		}
-		console.log(dy);
-		console.log(dh);
-		var newHeight = this.rescale.size.height + dh;
-		var newTop = this.position.top + dy;
-		if ((newTop + newHeight) < this.scr.height && newTop > -1) {
-			this.position.top = newTop;
-			this.rescale.size.height = newHeight;
-		}
-
-
-		var dw = e.movementX;
-		var dx = 0;
-		if (classes.indexOf('xc') > -1) {
-			dw = 0;
-		} else if (classes.indexOf('w') > -1) {
-			dw = -dw;
-			dx = -dw;
-		}
-		var newWidth = this.rescale.size.width + dw;
-		var newLeft = this.position.left + dx;
-
-		if ((newLeft + newWidth) < this.scr.width && newLeft > -1) {
-			this.rescale.size.width = newWidth;
-			this.position.left = newLeft;
-		}
-		// this.scalex(e.movementX);
-		// this.scaley(e.movementY);
+		this.scalex(e.movementX);
+		this.scaley(e.movementY);
 		this.rcr = this.resizable.getBoundingClientRect();
 	}
 
