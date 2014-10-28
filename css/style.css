@@ -332,45 +332,46 @@ __      _____ _  _ ___ ___
   position: absolute;
   top: 0;
   left: 0;
+  transform-origin: 0 0 0;
 }
 .resize .container .resizable.active {
   border: 1px dashed #444;
   cursor: move;
 }
-.resize .container .resizable.active .handle {
+.resize .container .resizable.active .h {
   width: 8px;
   height: 8px;
   position: absolute;
   background: #000;
 }
-.resize .container .resizable.active .handle.n {
+.resize .container .resizable.active .h.n {
   top: -1px;
 }
-.resize .container .resizable.active .handle.s {
+.resize .container .resizable.active .h.s {
   bottom: -1px;
 }
-.resize .container .resizable.active .handle.e {
+.resize .container .resizable.active .h.e {
   right: -1px;
 }
-.resize .container .resizable.active .handle.w {
+.resize .container .resizable.active .h.w {
   left: -1px;
 }
-.resize .container .resizable.active .handle.yc {
+.resize .container .resizable.active .h.yc {
   top: 50%;
   margin-top: -4px;
   cursor: ew-resize;
 }
-.resize .container .resizable.active .handle.xc {
+.resize .container .resizable.active .h.xc {
   left: 50%;
   margin-left: -4px;
   cursor: ns-resize;
 }
-.resize .container .resizable.active .handle.n.e,
-.resize .container .resizable.active .handle.s.w {
+.resize .container .resizable.active .h.n.e,
+.resize .container .resizable.active .h.s.w {
   cursor: nesw-resize;
 }
-.resize .container .resizable.active .handle.n.w,
-.resize .container .resizable.active .handle.s.e {
+.resize .container .resizable.active .h.n.w,
+.resize .container .resizable.active .h.s.e {
   cursor: nwse-resize;
 }
 .resize .container .wrapper {

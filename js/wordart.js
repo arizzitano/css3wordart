@@ -109,23 +109,39 @@
 		this.selectedStyle = s;
 		this.txt = t;
 		this.el = document.querySelector('.resize');
-		this.bcr = this.el.querySelector('.stage').getBoundingClientRect();
+		this.scr = this.el.querySelector('.stage').getBoundingClientRect();
 
 		this.resizable = null;
 		this.rcr = null;
 		this.wordArtObj = null;
 		this.wcr = null;
+		this.handles = null;
+
+		this.isDragging = false;
+		this.isResizing = false;
+		this.resizeHandle = null;
 
 		this.position = {
 			left: 0,
-			top: 0
+			top: 0,
+			width: null,
+			height: null
 		};
-		this.startPosition = {};
 
-		this.size = {};
+		this.rescale = {
+			scale: {
+				scaleX: 1,
+				scaleY: 1
+			},
+			size: {
+				height: null,
+				width: null
+			}
+		};
 	}
 
 	WordArt.prototype.init = function () {
+		//this.genDeltas();
 		this.render();
 		this.open();
 		this.bindHandlers();
@@ -143,30 +159,110 @@
 
 		self.resizable = clone.querySelector('.resizable');
 		self.wordArtObj = self.resizable.querySelector('.wordart');
+		self.handles = self.resizable.querySelectorAll('.h');
 
 		self.el.querySelector('.stage').appendChild(clone);
 		setTimeout(function () {
-			self.resize();
+			self.initSize();
 		}, 5);
 	};
 
-	WordArt.prototype.resize = function () {
+	WordArt.prototype.initSize = function () {
 		this.wcr = this.wordArtObj.getBoundingClientRect();
 		this.rcr = this.resizable.getBoundingClientRect();
-		this.size.width = (this.wcr.left - this.rcr.left) +
+		this.position.width = (this.wcr.left - this.rcr.left) +
 								this.wcr.width + 2;
-		this.size.height = this.wcr.height + 2;
+		this.position.height = this.wcr.height + 2;
+		this.rescale.size.height = this.position.height;
+		this.rescale.size.width = this.position.width;
 		this.rcr = this.resizable.getBoundingClientRect();
-		this.bcr = this.el.querySelector('.stage').getBoundingClientRect();
+		this.scr = this.el.querySelector('.stage').getBoundingClientRect();
 	};
 
 	WordArt.prototype.move = function (e) {
 		var newY = parseFloat(this.position.top) + e.movementY;
-		if (newY > -1 && (newY + this.rcr.height) < this.bcr.height) {
+		if (newY > -1 && (newY + this.rcr.height) < this.scr.height) {
 			this.position.top = newY;
 		}
-		this.position.left = parseFloat(this.position.left) + e.movementX;
+		var newX = parseFloat(this.position.left) + e.movementX;
+		if (newX > -1 && (newX + this.rcr.width) < this.scr.width) {
+			this.position.left = newX;
+		}
 	};
+
+	// WordArt.prototype.genDeltas = function () {
+	// 	var self = this;
+	// 	[{
+	// 		sizeProp: 'width',
+	// 		posProp: 'left',
+	// 		axis: 'x',
+	// 		edgeClass: 'w'
+	// 	}, {
+	// 		sizeProp: 'height',
+	// 		posProp: 'top',
+	// 		axis: 'y',
+	// 		edgeClass: 'n'
+	// 	}].forEach(function (args) {
+	// 		self['scale' + args.axis] = function (change) {
+	// 			var self = this;
+	// 			var classes = self.resizeHandle.className;
+	// 			var delta = change;
+	// 			var posDelta = 0;
+	// 			if (classes.indexOf((args.axis + 'c')) > -1) {
+	// 				delta = 0;
+	// 			} else if (classes.indexOf(args.edgeClass) > -1) {
+	// 				posDelta = delta = delta;
+	// 			}
+	// 			var newSize = self.rescale.size[args.sizeProp] + delta;
+	// 			var newPos = self.position[args.posProp] + posDelta;
+	// 			if ((newPos + newSize) < self.scr[args.sizeProp] && newPos > -1) {
+	// 				self.position[args.posProp] = newPos;
+	// 				self.rescale.size[args.sizeProp] = newSize;
+	// 			}
+	// 		};
+	// 	});
+	// }
+
+	WordArt.prototype.resize = function (e) {
+		var classes = this.resizeHandle.className;
+
+		var dh = e.movementY;
+		var dy = 0;
+		if (classes.indexOf('yc') > -1) {
+			dh = 0;
+		} else if (classes.indexOf('n') > -1) {
+			dh = -dh;
+			dy = -dh;
+		}
+		console.log(dy);
+		console.log(dh);
+		var newHeight = this.rescale.size.height + dh;
+		var newTop = this.position.top + dy;
+		if ((newTop + newHeight) < this.scr.height && newTop > -1) {
+			this.position.top = newTop;
+			this.rescale.size.height = newHeight;
+		}
+
+
+		var dw = e.movementX;
+		var dx = 0;
+		if (classes.indexOf('xc') > -1) {
+			dw = 0;
+		} else if (classes.indexOf('w') > -1) {
+			dw = -dw;
+			dx = -dw;
+		}
+		var newWidth = this.rescale.size.width + dw;
+		var newLeft = this.position.left + dx;
+
+		if ((newLeft + newWidth) < this.scr.width && newLeft > -1) {
+			this.rescale.size.width = newWidth;
+			this.position.left = newLeft;
+		}
+		// this.scalex(e.movementX);
+		// this.scaley(e.movementY);
+		this.rcr = this.resizable.getBoundingClientRect();
+	}
 
 	WordArt.prototype.open = function () {
 		this.el.style.display = 'block';
@@ -175,28 +271,51 @@
 	WordArt.prototype.bindHandlers = function () {
 		var self = this;
 
-		// event handlers
+		// dragging
 		self.wordArtObj.addEventListener('mousedown', function (e) {
 			self.isDragging = true;
 		});
 		document.addEventListener('mouseup', function (e) {
 			self.isDragging = false;
+			self.isResizing = false;
+			self.resizeHandle = null;
 		});
 		self.el.addEventListener('mousemove', function (e) {
 			if (self.isDragging) {
 				self.move(e);
+			} else if (self.isResizing) {
+				self.resize(e);
 			}
 		});
 
-		// size handlers
-		Object.observe(self.size, function (changes) {
+		// resizing
+		[].forEach.call(self.handles, function (el) {
+			el.addEventListener('mousedown', function (e) {
+				self.isResizing = true;
+				self.resizeHandle = e.target;
+			});
+		});
+
+		// data change handlers
+		Object.observe(self.position, function (changes) {
 			changes.forEach(function (c) {
 				self.resizable.style[c.name] = c.object[c.name] + 'px';
 			});
 		});
-		Object.observe(self.position, function (changes) {
+		Object.observe(self.rescale.size, function (changes) {
 			changes.forEach(function (c) {
-				self.resizable.style[c.name] = c.object[c.name] + 'px';
+				self.rescale.scale.scaleY = c.object.height / self.position.height;
+				self.rescale.scale.scaleX = c.object.width / self.position.width;
+			});
+		});
+		Object.observe(self.rescale.scale, function (changes) {
+			changes.forEach(function (c) {
+				['transform','-webkit-transform','-moz-transform',
+				'-o-transform','-ms-transform'].forEach(function (prop) {
+					self.resizable.style[prop] = 'scaleX(' +
+											c.object.scaleX + ') ' +
+											'scaleY(' + c.object.scaleY + ')';
+				});
 			});
 		});
 	};
