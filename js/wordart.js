@@ -2,6 +2,7 @@
 	function Gallery (p) {
 		this.el = document.querySelector('.gallery');
 		this.parentObject = p;
+		this.wordArtObj = null;
 		this.classes = [
 			'outline','up','arc','squeeze','inverted-arc','basic-stack',
 			'italic-outline','slate','mauve','graydient','red-blue','brown-stack',
@@ -41,8 +42,9 @@
 		el.className = el.className + ' selected';
 	};
 
-	Gallery.prototype.open = function () {
+	Gallery.prototype.open = function (w) {
 		this.selectedStyle = this.classes[0];
+		this.wordArtObj = w;
 		this.el.style.display = 'block';
 	};
 
@@ -54,7 +56,9 @@
 		var self = this;
 		self.el.querySelector('button.ok').addEventListener('click', function () {
 			self.close();
-			self.parentObject.launchEditor(self.selectedStyle);
+			self.wordArtObj.setStyle(self.selectedStyle);
+			self.parentObject.launchEditor();
+			//self.parentObject.launchEditor(self.selectedStyle);
 		});
 		self.el.querySelector('button.cancel').addEventListener('click', function () {
 			self.close();
@@ -63,7 +67,6 @@
 
 	Gallery.prototype.init = function () {
 		this.render();
-		this.open();
 		this.bindHandlers();
 	};
 
@@ -72,16 +75,17 @@
 
 	function Editor (p) {
 		this.parentObject = p;
+		this.wordArtObj = null;
 		this.el = document.querySelector('.editor');
 		this.defaultTxt = 'Your Text Here';
 	}
 
 	Editor.prototype.init = function () {
-		this.open();
 		this.bindHandlers();
 	};
 
-	Editor.prototype.open = function () {
+	Editor.prototype.open = function (w) {
+		this.wordArtObj = w;
 		this.el.querySelector('textarea').value = this.defaultTxt;
 		this.el.querySelector('textarea').select();
 		this.el.style.display = 'block';
@@ -96,7 +100,8 @@
 		self.el.querySelector('button.ok').addEventListener('click', function () {
 			self.close();
 			var txt = self.el.querySelector('textarea').value.trim() || this.defaultText();
-			self.parentObject.displayWordArt(txt);
+			self.wordArtObj.setText(txt);
+			self.parentObject.displayWordArt();
 		});
 		self.el.querySelector('button.cancel').addEventListener('click', function () {
 			self.close();
@@ -106,10 +111,10 @@
 	function WordArt (p, s, t) {
 		this.verticalStyles = ['basic-stack','brown-stack','green-stack','texture-stack','stack-3d'];
 		this.parentObject = p;
-		this.selectedStyle = s;
-		this.txt = t;
 		this.el = document.querySelector('.resize');
 		this.scr = this.el.querySelector('.stage').getBoundingClientRect();
+
+		this.selectedStyle, this.txt;
 
 		this.resizable = null;
 		this.rcr = null;
@@ -139,6 +144,14 @@
 			}
 		};
 	}
+
+	WordArt.prototype.setStyle = function (style) {
+		this.selectedStyle = style;
+	};
+
+	WordArt.prototype.setText = function (txt) {
+		this.txt = txt;
+	};
 
 	WordArt.prototype.init = function () {
 		this.genDeltas();
@@ -294,30 +307,36 @@
 
 	function WordArtMaker () {
 		this.gallery = new Gallery(this);
+		this.editor = new Editor(this);
 		this.selectedStyle = null;
-		this.editor = null;
 		this.txt = null;
 		this.wordArt = null;
+		this.wordArts = [];
 	}
 
 	WordArtMaker.prototype.init = function () {
-		this.gallery.init();
+		this.gallery.init(this);
+		this.editor.init(this);
+		//this.stage.init();
 	};
 
-	WordArtMaker.prototype.launchEditor = function (selectedStyle) {
-		this.editor = new Editor(this);
-		this.selectedStyle = selectedStyle;
-		this.editor.init();
+	WordArtMaker.prototype.makeNewWordArt = function () {
+		var w = new WordArt(this);
+		this.wordArts.push(w);
+		this.gallery.open(w);
 	};
 
-	WordArtMaker.prototype.displayWordArt = function (txt) {
-		this.txt = txt;
-		this.wordArt = new WordArt(this, this.selectedStyle, this.txt);
-		this.wordArt.init();
+	WordArtMaker.prototype.launchEditor = function () {
+		this.editor.open(this.wordArts[this.wordArts.length - 1]);
+	};
+
+	WordArtMaker.prototype.displayWordArt = function () {
+		this.wordArts[this.wordArts.length - 1].init();
 	};
 
 	document.addEventListener('DOMContentLoaded', function () {
 		var w = new WordArtMaker();
 		w.init();
+		w.makeNewWordArt();
 	});
 }());
