@@ -50,15 +50,15 @@
 
 	Gallery.prototype.close = function () {
 		this.el.style.display = 'none';
+		this.wordArtObj = null;
 	};
 
 	Gallery.prototype.bindHandlers = function () {
 		var self = this;
 		self.el.querySelector('button.ok').addEventListener('click', function () {
-			self.close();
 			self.wordArtObj.setStyle(self.selectedStyle);
+			self.close();
 			self.parentObject.launchEditor();
-			//self.parentObject.launchEditor(self.selectedStyle);
 		});
 		self.el.querySelector('button.cancel').addEventListener('click', function () {
 			self.close();
@@ -93,14 +93,15 @@
 
 	Editor.prototype.close = function () {
 		this.el.style.display = 'none';
+		this.wordArtObj = null;
 	};
 
 	Editor.prototype.bindHandlers = function () {
 		var self = this;
 		self.el.querySelector('button.ok').addEventListener('click', function () {
-			self.close();
 			var txt = self.el.querySelector('textarea').value.trim() || this.defaultText();
 			self.wordArtObj.setText(txt);
+			self.close();
 			self.parentObject.displayWordArt();
 		});
 		self.el.querySelector('button.cancel').addEventListener('click', function () {
@@ -108,11 +109,43 @@
 		});
 	};
 
-	function WordArt (p, s, t) {
+
+
+
+	function Stage (p) {
+		this.parentObject = p;
+		this.el = document.querySelector('.stage');
+		this.scr = null;
+	}
+
+	Stage.prototype.init = function () {
+		this.open();
+		this.bindHandlers();
+	};
+
+	Stage.prototype.open = function () {
+		this.el.style.display = 'block';
+		this.scr = this.el.querySelector('.stage').getBoundingClientRect();
+	};
+
+	Stage.prototype.bindHandlers = function () {
+		var self = this;
+		self.el.querySelector('.create').addEventListener('click', function () {
+			self.parentObject.makeNewWordArt();
+		});
+	};
+
+
+
+
+
+
+
+	function WordArt (p, s) {
 		this.verticalStyles = ['basic-stack','brown-stack','green-stack','texture-stack','stack-3d'];
 		this.parentObject = p;
-		this.el = document.querySelector('.resize');
-		this.scr = this.el.querySelector('.stage').getBoundingClientRect();
+		this.el = document.querySelector('.stage');
+		this.stage = s;
 
 		this.selectedStyle, this.txt;
 
@@ -156,7 +189,6 @@
 	WordArt.prototype.init = function () {
 		this.genDeltas();
 		this.render();
-		this.open();
 		this.bindHandlers();
 	};
 
@@ -189,16 +221,15 @@
 		this.rescale.size.height = this.position.height;
 		this.rescale.size.width = this.position.width;
 		this.rcr = this.resizable.getBoundingClientRect();
-		this.scr = this.el.querySelector('.stage').getBoundingClientRect();
 	};
 
 	WordArt.prototype.move = function (e) {
 		var newY = parseFloat(this.position.top) + e.movementY;
-		if (newY > -1 && (newY + this.rcr.height) < this.scr.height) {
+		if (newY > -1 && (newY + this.rcr.height) < this.stage.scr.height) {
 			this.position.top = newY;
 		}
 		var newX = parseFloat(this.position.left) + e.movementX;
-		if (newX > -1 && (newX + this.rcr.width) < this.scr.width) {
+		if (newX > -1 && (newX + this.rcr.width) < this.stage.scr.width) {
 			this.position.left = newX;
 		}
 	};
@@ -229,7 +260,7 @@
 				}
 				var newSize = self.rescale.size[args.sizeProp] + delta;
 				var newPos = self.position[args.posProp] + posDelta;
-				if ((newPos + newSize) < self.scr[args.sizeProp] && newPos > -1) {
+				if ((newPos + newSize) < self.stage.scr[args.sizeProp] && newPos > -1) {
 					self.position[args.posProp] = newPos;
 					self.rescale.size[args.sizeProp] = newSize;
 				}
@@ -241,10 +272,6 @@
 		this.scalex(e.movementX);
 		this.scaley(e.movementY);
 		this.rcr = this.resizable.getBoundingClientRect();
-	}
-
-	WordArt.prototype.open = function () {
-		this.el.style.display = 'block';
 	};
 
 	WordArt.prototype.bindHandlers = function () {
@@ -308,8 +335,8 @@
 	function WordArtMaker () {
 		this.gallery = new Gallery(this);
 		this.editor = new Editor(this);
-		this.selectedStyle = null;
-		this.txt = null;
+		this.stage = new Stage(this);
+
 		this.wordArt = null;
 		this.wordArts = [];
 	}
@@ -317,11 +344,11 @@
 	WordArtMaker.prototype.init = function () {
 		this.gallery.init(this);
 		this.editor.init(this);
-		//this.stage.init();
+		this.stage.init(this);
 	};
 
 	WordArtMaker.prototype.makeNewWordArt = function () {
-		var w = new WordArt(this);
+		var w = new WordArt(this, this.stage);
 		this.wordArts.push(w);
 		this.gallery.open(w);
 	};
@@ -331,12 +358,13 @@
 	};
 
 	WordArtMaker.prototype.displayWordArt = function () {
+		this.stage.open();
 		this.wordArts[this.wordArts.length - 1].init();
 	};
 
 	document.addEventListener('DOMContentLoaded', function () {
 		var w = new WordArtMaker();
 		w.init();
-		w.makeNewWordArt();
+		//w.makeNewWordArt();
 	});
 }());

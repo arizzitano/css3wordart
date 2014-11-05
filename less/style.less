@@ -135,14 +135,20 @@ __      _____ _  _ ___ ___
 -------------------------------------- */
 
 .dialog {
+    .bevel();
     width: 630px;
     height: 540px;
-    margin: 40px auto;
     background: #b3b3b3;
     padding: 4px;
     font-size: 14px;
     display: none;
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    margin: 0 0 100px -315px;
+    z-index: 100;
 }
+
 .dialog > .title {
     background: #00006f;
     background: @titlebar;
@@ -162,7 +168,6 @@ __      _____ _  _ ___ ___
     font-weight: bold;
 }
 .bevel {
-    position: relative;
     border-top: 2px solid #d7d7d7;
     border-right: 2px solid #000;
     border-bottom: 2px solid #000;
@@ -224,11 +229,16 @@ __      _____ _  _ ___ ___
     }
 
     button {
-        width: 114px;
-        height: 34px;
+        .bevel();
+        position: relative;
         text-align: center;
         font-family: MicrosoftSansSerif;
         font-size: 14px;
+
+        &.ok, &.cancel {
+            width: 114px;
+            height: 34px;
+        }
 
         &:focus {
             outline: 0;
@@ -243,6 +253,10 @@ __      _____ _  _ ___ ___
  \___/_/ \_\____|____|___|_|_\ |_|
 
  -------------------------------------- */
+
+.gallery {
+    z-index: 101;
+}
 
 .gallery > p {
     margin: 22px 8px 10px 8px;
@@ -308,6 +322,10 @@ __      _____ _  _ ___ ___
 
  -------------------------------------- */
 
+.editor {
+    z-index: 102;
+}
+
 .editor label {
     display: block;
 }
@@ -350,9 +368,18 @@ __      _____ _  _ ___ ___
 
 -------------------------------------- */
 
-.resize .container {
+.stage .container {
     padding: 11px;
     height: 430px;
+
+    .button-row {
+        margin-bottom: 11px;
+
+        button {
+            width: 34px;
+            height: 34px;
+        }
+    }
 
     .window {
         .inset();

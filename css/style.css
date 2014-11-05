@@ -86,13 +86,34 @@ __      _____ _  _ ___ ___
 
 -------------------------------------- */
 .dialog {
+  border-top: 2px solid #d7d7d7;
+  border-right: 2px solid #000;
+  border-bottom: 2px solid #000;
+  border-left: 2px solid #d7d7d7;
   width: 630px;
   height: 540px;
-  margin: 40px auto;
   background: #b3b3b3;
   padding: 4px;
   font-size: 14px;
   display: none;
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  margin: 0 0 100px -315px;
+  z-index: 100;
+}
+.dialog:before {
+  position: absolute;
+  display: block;
+  content: '';
+  border-top: 2px solid #fff;
+  border-right: 2px solid #6d6d6d;
+  border-bottom: 2px solid #6d6d6d;
+  border-left: 2px solid #fff;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 .dialog > .title {
   background: #00006f;
@@ -113,7 +134,6 @@ __      _____ _  _ ___ ___
   font-weight: bold;
 }
 .bevel {
-  position: relative;
   border-top: 2px solid #d7d7d7;
   border-right: 2px solid #000;
   border-bottom: 2px solid #000;
@@ -167,11 +187,32 @@ __      _____ _  _ ___ ___
   margin-left: 10px;
 }
 .dialog button {
-  width: 114px;
-  height: 34px;
+  border-top: 2px solid #d7d7d7;
+  border-right: 2px solid #000;
+  border-bottom: 2px solid #000;
+  border-left: 2px solid #d7d7d7;
+  position: relative;
   text-align: center;
   font-family: MicrosoftSansSerif;
   font-size: 14px;
+}
+.dialog button:before {
+  position: absolute;
+  display: block;
+  content: '';
+  border-top: 2px solid #fff;
+  border-right: 2px solid #6d6d6d;
+  border-bottom: 2px solid #6d6d6d;
+  border-left: 2px solid #fff;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.dialog button.ok,
+.dialog button.cancel {
+  width: 114px;
+  height: 34px;
 }
 .dialog button:focus {
   outline: 0;
@@ -183,6 +224,9 @@ __      _____ _  _ ___ ___
  \___/_/ \_\____|____|___|_|_\ |_|
 
  -------------------------------------- */
+.gallery {
+  z-index: 101;
+}
 .gallery > p {
   margin: 22px 8px 10px 8px;
 }
@@ -259,6 +303,9 @@ __      _____ _  _ ___ ___
 |___|___/___| |_| \___/|_|_\
 
  -------------------------------------- */
+.editor {
+  z-index: 102;
+}
 .editor label {
   display: block;
 }
@@ -294,11 +341,18 @@ __      _____ _  _ ___ ___
 |_|_\___|___/___/___|___|
 
 -------------------------------------- */
-.resize .container {
+.stage .container {
   padding: 11px;
   height: 430px;
 }
-.resize .container .window {
+.stage .container .button-row {
+  margin-bottom: 11px;
+}
+.stage .container .button-row button {
+  width: 34px;
+  height: 34px;
+}
+.stage .container .window {
   position: relative;
   border-top: 2px solid #6d6d6d;
   border-right: 2px solid #fff;
@@ -309,7 +363,7 @@ __      _____ _  _ ___ ___
   width: 100%;
   height: 100%;
 }
-.resize .container .window:before {
+.stage .container .window:before {
   position: absolute;
   display: block;
   content: '';
@@ -322,59 +376,59 @@ __      _____ _  _ ___ ___
   right: 0;
   bottom: 0;
 }
-.resize .container .stage {
+.stage .container .stage {
   position: relative;
   width: 100%;
   height: 100%;
   overflow: scroll;
 }
-.resize .container .resizable {
+.stage .container .resizable {
   position: absolute;
   top: 0;
   left: 0;
   transform-origin: 0 0 0;
 }
-.resize .container .resizable.active {
+.stage .container .resizable.active {
   border: 1px dashed #444;
   cursor: move;
 }
-.resize .container .resizable.active .h {
+.stage .container .resizable.active .h {
   width: 8px;
   height: 8px;
   position: absolute;
   background: #000;
 }
-.resize .container .resizable.active .h.n {
+.stage .container .resizable.active .h.n {
   top: -1px;
 }
-.resize .container .resizable.active .h.s {
+.stage .container .resizable.active .h.s {
   bottom: -1px;
 }
-.resize .container .resizable.active .h.e {
+.stage .container .resizable.active .h.e {
   right: -1px;
 }
-.resize .container .resizable.active .h.w {
+.stage .container .resizable.active .h.w {
   left: -1px;
 }
-.resize .container .resizable.active .h.yc {
+.stage .container .resizable.active .h.yc {
   top: 50%;
   margin-top: -4px;
   cursor: ew-resize;
 }
-.resize .container .resizable.active .h.xc {
+.stage .container .resizable.active .h.xc {
   left: 50%;
   margin-left: -4px;
   cursor: ns-resize;
 }
-.resize .container .resizable.active .h.n.e,
-.resize .container .resizable.active .h.s.w {
+.stage .container .resizable.active .h.n.e,
+.stage .container .resizable.active .h.s.w {
   cursor: nesw-resize;
 }
-.resize .container .resizable.active .h.n.w,
-.resize .container .resizable.active .h.s.e {
+.stage .container .resizable.active .h.n.w,
+.stage .container .resizable.active .h.s.e {
   cursor: nwse-resize;
 }
-.resize .container .wrapper {
+.stage .container .wrapper {
   position: relative;
   top: 50%;
   transform: translateY(-50%);
@@ -383,10 +437,10 @@ __      _____ _  _ ___ ___
   -o-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
 }
-.resize .container .wordart {
+.stage .container .wordart {
   font-size: 60px;
 }
-.resize .container .wordart:not(.basic-stack):not(.brown-stack):not(.green-stack):not(.texture-stack):not(.stack-3d) {
+.stage .container .wordart:not(.basic-stack):not(.brown-stack):not(.green-stack):not(.texture-stack):not(.stack-3d) {
   white-space: nowrap;
 }
 /* -------------------------------------

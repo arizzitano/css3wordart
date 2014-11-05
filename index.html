@@ -6,13 +6,13 @@
     <script src="js/wordart.js"></script>
 </head>
 <body>
-    <section class="dialog gallery bevel">
+    <section class="dialog gallery">
         <h3 class="title">WordArt Gallery</h3>
         <p>Select a <span class="hk">W</span>ordArt Style:</p>
         <ul class="gallery-thumbs" id="galleryThumbs"></ul>
         <div class="button-box right">
-            <button class="bevel ok">OK</button>
-            <button class="bevel cancel">Cancel</button>
+            <button class="ok">OK</button>
+            <button class="cancel">Cancel</button>
         </div>
 
         <template id="galleryTemplate">
@@ -39,7 +39,7 @@
         </template>
     </section>
 
-    <section class="dialog editor bevel">
+    <section class="dialog editor">
         <h3 class="title">Edit WordArt Text</h3>
         <!--<div class="form-element font">
             <label><span class="hk">F</span>ont</label>
@@ -59,14 +59,17 @@
             </span>
         </div>
         <div class="button-box right">
-            <button class="bevel ok">OK</button>
-            <button class="bevel cancel">Cancel</button>
+            <button class="ok">OK</button>
+            <button class="cancel">Cancel</button>
         </div>
     </section>
 
-    <section class="dialog resize bevel">
+    <section class="dialog stage">
         <h3 class="title">WordArt</h3>
         <div class="container">
+            <div class="button-row">
+                <button class="create">A</button>
+            </div>
             <div class="window">
                 <div class="stage"></div>
             </div>
@@ -86,7 +89,6 @@
                 <span class="h s xc"></span>
                 <span class="h s w"></span>
                 <span class="h w yc"></span>
-
             </div>
         </template>
     </section>
