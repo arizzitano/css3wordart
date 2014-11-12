@@ -1262,9 +1262,13 @@ __      _____  ___ ___   _   ___ _____
   background: -ms-linear-gradient(-45deg, #3dff32 0%, #30f4ff 50%, #ff00fa 100%);
   background: linear-gradient(135deg, #3dff32 0%, #30f4ff 50%, #ff00fa 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3dff32', endColorstr='#ff00fa', GradientType=1);
+  background-attachment: fixed;
+  overflow: hidden;
 }
 .background .wordart {
   position: absolute;
+  top: -500px;
+  left: -500px;
 }
 .background .rotateY {
   -webkit-animation: rotateY 1s infinite ease;

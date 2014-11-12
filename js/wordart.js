@@ -1,24 +1,18 @@
 (function () {
-    var classes = [
+    var CLASSES = [
         'outline','up','arc','squeeze','inverted-arc','basic-stack',
         'italic-outline','slate','mauve','graydient','red-blue','brown-stack',
         'radial','purple','green-marble','rainbow','aqua','texture-stack',
         'paper-bag','sunset','tilt','blues','yellow-dash','green-stack',
         'chrome','marble-slab','gray-block','superhero','horizon','stack-3d'
     ];
+    var BG_SPEED = 3;
 
     function Gallery (p) {
         this.el = document.querySelector('.gallery');
         this.parentObject = p;
         this.wordArtObj = null;
-        this.classes = [
-            'outline','up','arc','squeeze','inverted-arc','basic-stack',
-            'italic-outline','slate','mauve','graydient','red-blue','brown-stack',
-            'radial','purple','green-marble','rainbow','aqua','texture-stack',
-            'paper-bag','sunset','tilt','blues','yellow-dash','green-stack',
-            'chrome','marble-slab','gray-block','superhero','horizon','stack-3d'
-        ];
-        this.selectedStyle = this.classes[0];
+        this.selectedStyle = CLASSES[0];
     }
 
     Gallery.prototype.render = function () {
@@ -26,7 +20,7 @@
         var target = self.el.querySelector('#galleryThumbs');
         var template = self.el.querySelector('#galleryTemplate');
         var stacked = self.el.querySelector('#galleryStackedTemplate');
-        self.classes.forEach(function (c, i) {
+        CLASSES.forEach(function (c, i) {
             var tmpl = ((i+1) % 6 === 0) ? stacked : template;
             var clone = tmpl.content.cloneNode(true);
             var li = clone.querySelector('li');
@@ -51,7 +45,7 @@
     };
 
     Gallery.prototype.open = function (w) {
-        this.selectedStyle = this.classes[0];
+        this.selectedStyle = CLASSES[0];
         this.wordArtObj = w;
         this.el.style.display = 'block';
     };
@@ -146,9 +140,8 @@
     function Background (p) {
         this.parentObject = p;
         this.el = document.querySelector('.background');
-        this.numElements = 30;
-        this.bbcr = this.el.getBoundingClientRect();
-        this.tmpl = this.el.querySelector('#bgWordart');
+        this.numElements = 1;
+        this.bcr = this.el.getBoundingClientRect();
     }
 
     Background.prototype.init = function () {
@@ -158,23 +151,89 @@
     };
 
     Background.prototype.createWordart = function () {
-        var top = Math.random() * this.bbcr.height;
-        var left = Math.random() * this.bbcr.width;
-        var fontSize = 40 + (Math.random() * 30);
-        var randClass = classes[Math.round(Math.random() * (classes.length - 1))];
-        var clone = this.tmpl.content.cloneNode(true);
-        var wa = clone.querySelector('.wordart');
-        //var span = wa.querySelector('span');
-        wa.className = wa.className + ' ' + randClass;
-        //span.setAttribute('data-text', self.txt);
-        //span.innerHTML = self.txt;
-        wa.style.top = top + 'px';
-        wa.style.left = left + 'px';
-        wa.style.fontSize = fontSize + 'px';
-        this.el.appendChild(clone);
+        var bgw = new BgWordArt(this);
+        bgw.init();
+        this.el.appendChild(bgw.el);
+        bgw.startAnimation();
     };
 
+    function BgWordArt (p) {
+        this.parentObject = p;
+        this.tmpl = document.querySelector('#bgWordart');
+        this.el = null;
+        this.bcr = null;
+        this.pbcr = null;
+        this.position = {};
+        this.dir = {};
+        this.t = null;
+    }
 
+    BgWordArt.prototype.init = function () {
+        this.render();
+        this.bindHandlers();
+    };
+
+    BgWordArt.prototype.render = function () {
+        var fontSize = 40 + (Math.random() * 30);
+        var randClass = CLASSES[Math.round(Math.random() * (CLASSES.length - 1))];
+        var clone = this.tmpl.content.cloneNode(true);
+        var wa = clone.querySelector('.wordart');
+        wa.className = wa.className + ' ' + randClass;
+        wa.style.fontSize = fontSize + 'px';
+        this.el = wa;
+    };
+
+    BgWordArt.prototype.startAnimation = function () {
+        var self = this;
+        this.calcBcrs();
+        this.position.left = Math.random() * this.pbcr.width;
+        this.position.top = Math.random() * this.pbcr.height;
+        this.dir.x = (Math.random() * 2) - 1;
+        this.dir.y = (Math.random() * 2) - 1;
+        this.startTimer();
+    };
+
+    BgWordArt.prototype.startTimer = function () {
+        var self = this;
+        self.i = setTimeout(function () {
+            self.animate();
+        }, 50);
+    };
+
+    BgWordArt.prototype.animate = function () {
+        var newLeft = this.position.left + (this.dir.x * BG_SPEED);
+        if (this.position.left > 0 && this.position.left < this.pbcr.width) {
+            this.position.left = newLeft;
+        } else {
+            this.dir.x = -this.dir.x;
+            this.position.left = this.position.left + (this.dir.x * BG_SPEED);
+        }
+        var newTop = this.position.top + (this.dir.y * BG_SPEED);
+        if (this.position.top > 0 && this.position.top < this.pbcr.height) {
+            this.position.top = newTop;
+        } else {
+            this.dir.y = -this.dir.y;
+            this.position.top = this.position.top + (this.dir.y * BG_SPEED);
+        }
+        this.startTimer();
+    };
+
+    BgWordArt.prototype.calcBcrs = function () {
+        this.bcr = this.el.getBoundingClientRect();
+        this.pbcr = {
+            width: this.parentObject.bcr.width - this.bcr.width,
+            height: this.parentObject.bcr.height - this.bcr.height
+        };
+    };
+
+    BgWordArt.prototype.bindHandlers = function () {
+        var self = this;
+        Object.observe(self.position, function (changes) {
+            changes.forEach(function (c) {
+                self.el.style[c.name] = c.object[c.name] + 'px';
+            });
+        });
+    };
 
 
 
