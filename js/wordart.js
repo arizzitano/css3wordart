@@ -1,4 +1,12 @@
 (function () {
+    var classes = [
+        'outline','up','arc','squeeze','inverted-arc','basic-stack',
+        'italic-outline','slate','mauve','graydient','red-blue','brown-stack',
+        'radial','purple','green-marble','rainbow','aqua','texture-stack',
+        'paper-bag','sunset','tilt','blues','yellow-dash','green-stack',
+        'chrome','marble-slab','gray-block','superhero','horizon','stack-3d'
+    ];
+
     function Gallery (p) {
         this.el = document.querySelector('.gallery');
         this.parentObject = p;
@@ -135,6 +143,36 @@
         });
     };
 
+    function Background (p) {
+        this.parentObject = p;
+        this.el = document.querySelector('.background');
+        this.numElements = 30;
+        this.bbcr = this.el.getBoundingClientRect();
+        this.tmpl = this.el.querySelector('#bgWordart');
+    }
+
+    Background.prototype.init = function () {
+        for (var i=0; i<this.numElements; i++) {
+            this.createWordart();
+        }
+    };
+
+    Background.prototype.createWordart = function () {
+        var top = Math.random() * this.bbcr.height;
+        var left = Math.random() * this.bbcr.width;
+        var fontSize = 40 + (Math.random() * 30);
+        var randClass = classes[Math.round(Math.random() * (classes.length - 1))];
+        var clone = this.tmpl.content.cloneNode(true);
+        var wa = clone.querySelector('.wordart');
+        //var span = wa.querySelector('span');
+        wa.className = wa.className + ' ' + randClass;
+        //span.setAttribute('data-text', self.txt);
+        //span.innerHTML = self.txt;
+        wa.style.top = top + 'px';
+        wa.style.left = left + 'px';
+        wa.style.fontSize = fontSize + 'px';
+        this.el.appendChild(clone);
+    };
 
 
 
@@ -333,6 +371,7 @@
 
 
     function WordArtMaker () {
+        this.background = new Background(this);
         this.gallery = new Gallery(this);
         this.editor = new Editor(this);
         this.stage = new Stage(this);
@@ -342,6 +381,7 @@
     }
 
     WordArtMaker.prototype.init = function () {
+        this.background.init(this);
         this.gallery.init(this);
         this.editor.init(this);
         this.stage.init(this);
