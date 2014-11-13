@@ -147,12 +147,20 @@
     }
 
     Background.prototype.init = function () {
+        this.bindHandlers();
         for (var i=0; i<CLASSES.length; i++) {
             var bgw = new BgWordArt(this, CLASSES[i]);
             bgw.init();
             this.el.appendChild(bgw.el);
             bgw.startAnimation();
         }
+    };
+
+    Background.prototype.bindHandlers = function () {
+        var self = this;
+        window.addEventListener('resize', function (event) {
+            self.bcr = self.el.getBoundingClientRect();
+        });
     };
 
 
@@ -163,11 +171,10 @@
         this.tmpl = document.querySelector('#bgWordart');
         this.el = null;
         this.bcr = null;
-        this.pbcr = null;
         this.position = {};
         this.speed = {
-            x: 4 + Math.random() * 3,
-            y: 4 + Math.random() * 3
+            x: 5 + Math.random() * 3,
+            y: 5 + Math.random() * 3
         }
         this.dir = {};
         this.t = null;
@@ -187,11 +194,15 @@
         this.el = wa;
     };
 
+    BgWordArt.prototype.availSize = function (dimension) {
+        return this.parentObject.bcr[dimension] - this.bcr[dimension];
+    };
+
     BgWordArt.prototype.startAnimation = function () {
         var self = this;
-        this.calcBcrs();
-        this.position.left = Math.random() * this.pbcr.width;
-        this.position.top = Math.random() * this.pbcr.height;
+        this.bcr = this.el.getBoundingClientRect();
+        this.position.left = Math.random() * this.availSize('width');
+        this.position.top = Math.random() * this.availSize('height');
         this.dir.x = (Math.random() * 2) - 1;
         this.dir.y = (Math.random() * 2) - 1;
         this.startTimer();
@@ -206,28 +217,20 @@
 
     BgWordArt.prototype.animate = function () {
         var newLeft = this.position.left + (this.dir.x * this.speed.x);
-        if (this.position.left > 0 && this.position.left < this.pbcr.width) {
+        if (this.position.left > 0 && this.position.left < this.availSize('width')) {
             this.position.left = newLeft;
         } else {
             this.dir.x = -this.dir.x;
             this.position.left = this.position.left + (this.dir.x * this.speed.x);
         }
         var newTop = this.position.top + (this.dir.y * this.speed.y);
-        if (this.position.top > 0 && this.position.top < this.pbcr.height) {
+        if (this.position.top > 0 && this.position.top < this.availSize('height')) {
             this.position.top = newTop;
         } else {
             this.dir.y = -this.dir.y;
             this.position.top = this.position.top + (this.dir.y * this.speed.y);
         }
         this.startTimer();
-    };
-
-    BgWordArt.prototype.calcBcrs = function () {
-        this.bcr = this.el.getBoundingClientRect();
-        this.pbcr = {
-            width: this.parentObject.bcr.width - this.bcr.width,
-            height: this.parentObject.bcr.height - this.bcr.height
-        };
     };
 
     BgWordArt.prototype.bindHandlers = function () {
