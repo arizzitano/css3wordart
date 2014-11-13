@@ -166,8 +166,8 @@
         this.pbcr = null;
         this.position = {};
         this.speed = {
-            x: 3 + Math.random() * 3,
-            y: 3 + Math.random() * 3
+            x: 4 + Math.random() * 3,
+            y: 4 + Math.random() * 3
         }
         this.dir = {};
         this.t = null;
@@ -429,8 +429,9 @@
 
     WordArt.prototype.close = function () {
         this.el.style.display = 'none';
-        // destroy existing wordart objects
     };
+
+
 
 
     function WordArtMaker () {
@@ -441,10 +442,12 @@
 
         this.wordArt = null;
         this.wordArts = [];
+
+        this.background.init(this);
+        this.bindHandlers();
     }
 
     WordArtMaker.prototype.init = function () {
-        this.background.init(this);
         this.gallery.init(this);
         this.editor.init(this);
         this.stage.init(this);
@@ -465,8 +468,16 @@
         this.wordArts[this.wordArts.length - 1].init();
     };
 
+    WordArtMaker.prototype.bindHandlers = function () {
+        var self = this;
+        document.querySelector('.welcome button').addEventListener('click', function () {
+            document.querySelector('.welcome').style.display = 'none';
+            self.init();
+            self.makeNewWordArt();
+        });
+    };
+
     document.addEventListener('DOMContentLoaded', function () {
         var w = new WordArtMaker();
-        w.init();
     });
 }());
