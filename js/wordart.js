@@ -473,11 +473,11 @@
 
     WordArtMaker.prototype.bindHandlers = function () {
         var self = this;
-        document.querySelector('.welcome button').addEventListener('click', function () {
+        document.querySelectorAll('.welcome button').forEach(button => button.addEventListener('click', function () {
             document.querySelector('.welcome').style.display = 'none';
             self.init();
             self.makeNewWordArt();
-        });
+        }));
     };
 
     document.addEventListener('DOMContentLoaded', function () {
