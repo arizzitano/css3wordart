@@ -4,6 +4,8 @@
   "description": "wordart for modern times",
   "main": "gulpfile.js",
   "scripts": {
+    "build": "gulp less",
+    "start": "gulp connect",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "ari rizzitano",
@@ -13,5 +15,8 @@
     "gulp-connect": "~2.0.5",
     "gulp-jshint": "~1.6.1",
     "gulp-less": "~1.2.3"
+  },
+  "dependencies": {
+    "object.observe": "^0.2.6"
   }
 }
